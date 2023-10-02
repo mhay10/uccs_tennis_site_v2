@@ -25,16 +25,19 @@
   <button class="hamburger" on:click={toggleMenu}>&#9776;</button>
   <!-- Navigation links container -->
   <nav class="links" class:show>
-    <a href="/schedule" class="link {$page.url.pathname === '/schedule' ? 'selected' : null}"
+    <a href="/schedule" class="link {$page.url.pathname.includes('/schedule') ? 'selected' : null}"
       >Schedule</a
     >
-    <a href="/poolplay" class="link {$page.url.pathname === '/poolplay' ? 'selected' : null}"
+    <a href="/poolplay" class="link {$page.url.pathname.includes('/poolplay') ? 'selected' : null}"
       >Pool Play</a
     >
-    <a href="/bracketplay" class="link {$page.url.pathname === '/bracketplay' ? 'selected' : null}"
-      >Bracket Play</a
+    <a
+      href="/bracketplay"
+      class="link {$page.url.pathname.includes('/bracketplay') ? 'selected' : null}">Bracket Play</a
     >
-    <a href="/admin" class="link {$page.url.pathname === '/admin' ? 'selected' : null}">Admin</a>
+    <a href="/admin" class="link {$page.url.pathname.includes('/admin') ? 'selected' : null}"
+      >Admin</a
+    >
   </nav>
 </header>
 <br />
@@ -76,7 +79,7 @@
   }
 
   .link.selected {
-    background-color: #ccc;
+    background-color: var(--color-1);
   }
 
   /* Media query to show/hide the navigation links */
@@ -92,7 +95,7 @@
       width: 95%;
       top: 50px;
       background-color: #fff;
-      border: 1px solid #ccc;
+      border: 1px solid var(--color-1);
     }
 
     .links.show {

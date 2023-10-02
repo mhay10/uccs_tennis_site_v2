@@ -3,7 +3,10 @@
 :root {
   --font-body: "Lexend", sans-serif;
   --font-mono: monospace;
-  --color-text: black;
+  --color-text: #000;
+  --color-1: #ccc;
+  --color-2: #808080;
+  --color-3: #404040;
 
   font-family: var(--font-body);
   color: var(--color-text);
