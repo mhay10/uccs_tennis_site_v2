@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+
+:root {
+  --font-body: "Lexend", sans-serif;
+  --font-mono: monospace;
+  --color-text: black;
+
+  font-family: var(--font-body);
+  color: var(--color-text);
+}
+
+.main {
+  text-align: center;
+}
