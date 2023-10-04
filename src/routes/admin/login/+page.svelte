@@ -1,11 +1,11 @@
-<form class="login-form" method="POST" action="?/submit">
+<form class="login-form" method="POST" action="?">
   <div class="row">
     <label for="username">Username</label>
     <input type="text" class="credentials" id="username" name="username" required />
   </div>
   <div class="row">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" class="credentials" required />
+    <p>Password</p>
+    <input type="password" name="password" class="credentials" required />
   </div>
   <button type="submit" class="submit">Login</button>
 </form>
