@@ -7,7 +7,9 @@
   --color-1: #ccc;
   --color-2: #808080;
   --color-3: #404040;
+}
 
+* {
   font-family: var(--font-body);
   color: var(--color-text);
 }

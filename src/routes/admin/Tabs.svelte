@@ -40,7 +40,7 @@
       </li>
       <li>
         <form method="POST" action="?">
-          <button type="submit" class="tab">Logout</button>
+          <button type="submit" id="logout" class="tab">Logout</button>
         </form>
       </li>
     </ul>
@@ -52,14 +52,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
     border: 1px solid var(--color-1);
     color: #000;
+    height: 100%;
+    width: fit-content;
+    margin: 0 auto;
   }
 
   nav {
-    width: 100%;
-    max-width: 1200px;
+    /* width: 85%; */
     margin: 0 auto;
   }
 
@@ -81,5 +82,13 @@
 
   .tab.active {
     background-color: var(--color-1);
+  }
+
+  #logout {
+    border: none;
+    border-left: 1px solid var(--color-1);
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
   }
 </style>

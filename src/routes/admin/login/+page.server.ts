@@ -1,6 +1,7 @@
 import { ADMIN_USERNAME, ADMIN_PASSWORD } from "$env/static/private";
 import { createAuthCookie } from "$lib/auth.js";
 import { fail, redirect } from "@sveltejs/kit";
+import { db } from "$lib/db/db.js";
 
 export const actions = {
   default: async ({ cookies, request }) => {
