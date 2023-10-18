@@ -1,6 +1,6 @@
 # UCCS Tennis Site V2
 
-A website for managing multiple World Team Tennis (WTT) tournaments and providing a public view of courts and scores of the currently active one
+A website for managing multiple World Team Tennis (WTT) tournaments and providing a public view of courts and scores of the currently active tournament
 
 ## Database
 
