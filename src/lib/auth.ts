@@ -1,3 +1,5 @@
+import { redirect, type RequestEvent } from "@sveltejs/kit";
+
 export function createAuthCookie() {
   // Set cookie expiration date to 12 hours
   const now = new Date();
@@ -24,4 +26,12 @@ export function getAuthCookie(cookieString: string) {
 
   // Return token
   return cookie ? cookie.split("=")[1] : null;
+}
+
+export function handleLogoutForm({ cookies }: RequestEvent) {
+  // Delete auth cookie
+  cookies.delete("auth_token");
+
+  // Redirect to login page
+  throw redirect(302, "/admin/login");
 }

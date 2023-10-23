@@ -9,8 +9,6 @@ export async function load({ params }) {
 
 export const actions = {
   logout: handleLogoutForm,
-  addteams_single: async ({ request }) => {
-    const data = Object.fromEntries(await request.formData());
-    console.log(data);
-  }
+  addteam: () => console.log("hello"),
+  addbulk: () => console.log("goodbye")
 };
