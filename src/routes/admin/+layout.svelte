@@ -5,6 +5,7 @@
 
 {#if $page.url.pathname !== "/admin/login"}
   <Tabs />
+  <br />
 {/if}
 
 <slot />

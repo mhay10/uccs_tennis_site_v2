@@ -40,10 +40,10 @@
     border-radius: 5px;
   }
 
-  .submit {
+  /* .submit {
     padding: 5px;
     border: 1px solid var(--color-1);
     border-radius: 5px;
     background-color: var(--color-1);
-  }
+  } */
 </style>
