@@ -1,5 +1,5 @@
 import { handleLogoutForm } from "$lib/auth.js";
-import { POST } from "./+server.js";
+import { handleBulk, handleSingle } from "$lib/handlers/addteams.js";
 
 export async function load({ params }) {
   return {
@@ -9,6 +9,6 @@ export async function load({ params }) {
 
 export const actions = {
   logout: handleLogoutForm,
-  addteam: () => console.log("hello"),
-  addbulk: () => console.log("goodbye")
+  addteam: handleSingle,
+  addbulk: handleBulk
 };

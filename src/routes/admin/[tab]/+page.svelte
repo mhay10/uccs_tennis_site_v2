@@ -12,17 +12,17 @@
   export let data: PageData;
 </script>
 
-{#if $page.url.pathname.endsWith("add-teams")}
+{#if data.tab === "add-teams"}
   <AddTeams />
-{:else if $page.url.pathname.endsWith("create-pools")}
+{:else if data.tab === "create-pools"}
   <CreatePools />
-{:else if $page.url.pathname.endsWith("manage-pools")}
+{:else if data.tab === "manage-pools"}
   <ManagePools />
-{:else if $page.url.pathname.endsWith("create-brackets")}
+{:else if data.tab === "create-brackets"}
   <CreateBrackets />
-{:else if $page.url.pathname.endsWith("manage-brackets")}
+{:else if data.tab === "manage-brackets"}
   <ManageBrackets />
-{:else if $page.url.pathname.endsWith("manage-schedule")}
+{:else if data.tab === "manage-schedule"}
   <ManageSchedule />
 {/if}
 
