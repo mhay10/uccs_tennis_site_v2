@@ -6,7 +6,6 @@
   import CreateBrackets from "$lib/components/admin/CreateBrackets.svelte";
   import ManageBrackets from "$lib/components/admin/ManageBrackets.svelte";
   import ManageSchedule from "$lib/components/admin/ManageSchedule.svelte";
-  import { page } from "$app/stores";
 
   // Contains the current selected tab
   export let data: PageData;
@@ -25,4 +24,3 @@
 {:else if data.tab === "manage-schedule"}
   <ManageSchedule />
 {/if}
-

@@ -1,3 +1,7 @@
+<script lang="ts">
+  export let teams = [];
+</script>
+
 <div class="forms">
   <form class="add-team single" method="POST" action="?/addteam">
     <label for="team-name">Team Name</label>
@@ -40,6 +44,7 @@
     <th>Team Name</th>
     <th>Team ID</th>
   </tr>
+  {JSON.stringify(teams, null, " ")}
 </table>
 
 <style>

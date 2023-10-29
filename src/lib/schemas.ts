@@ -2,8 +2,8 @@ import { Schema } from "mongoose";
 
 export const activeTournamentSchema = new Schema(
   {
-    _id: String,
-    active_tournament: String
+    _id: { type: String, required: true },
+    active_tournament: { type: String, required: true }
   },
   { collection: "current_active" }
 );
@@ -11,63 +11,82 @@ export const activeTournamentSchema = new Schema(
 export const tournamentSchema = new Schema(
   {
     // Tournament info
-    _id: String,
-    name: String,
+    _id: { type: String, required: true },
+    name: { type: String, required: true },
 
     // Team organization
-    teams: [{ id: String, name: String }],
-    pools: [{ id: Number, teams: [{ id: String, name: String }] }],
-    brackets: [{ id: Number, teams: [{ id: String, name: String }] }],
+    teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
+    pools: [
+      {
+        _id: { type: Number, required: true },
+        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }]
+      }
+    ],
+    brackets: [
+      {
+        _id: { type: Number, required: true },
+        name: { type: String, required: true },
+        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }]
+      }
+    ],
 
     // Scores
     pool_scores: [
       {
-        pool_id: Number,
-        team1: { id: String, score: Number },
-        team2: { id: String, score: Number },
-        team1_score: Number,
-        team2_score: Number
+        pool_id: { type: Number, required: true },
+        team1: { _id: { type: String, required: true }, score: { type: Number, required: true } },
+        team2: { _id: { type: String, required: true }, score: { type: Number, required: true } },
+        team1_score: { type: Number, required: true },
+        team2_score: { type: Number, required: true }
       }
     ],
     bracket_scores: [
       {
-        bracket_id: Number,
-        team1: { id: String, score: Number },
-        team2: { id: String, score: Number },
-        team1_score: Number,
-        team2_score: Number,
-        stage: Number
+        bracket_id: { type: Number, required: true },
+        team1: { _id: { type: String, required: true }, score: { type: Number, required: true } },
+        team2: { _id: { type: String, required: true }, score: { type: Number, required: true } },
+        team1_score: { type: Number, required: true },
+        team2_score: { type: Number, required: true },
+        stage: { type: Number, required: true }
       }
     ],
 
     // Pool play results
     pool_results: [
       {
-        id: String,
-        name: String,
-        games_won: Number,
-        games_lost: Number,
-        total_games: Number,
-        matches_won: Number,
-        matches_lost: Number,
-        total_matches: Number
+        _id: { type: String, required: true },
+        team: { _id: { type: String, required: true }, name: { type: String, required: true } },
+        games_won: { type: Number, required: true },
+        games_lost: { type: Number, required: true },
+        total_games: { type: Number, required: true },
+        matches_won: { type: Number, required: true },
+        matches_lost: { type: Number, required: true },
+        total_matches: { type: Number, required: true }
       }
     ],
 
     // Court scheduling
     schedules: [
       {
-        courts: [Number],
-        start: Date,
-        end: Date,
-        team1: { id: String, name: String },
-        team2: { id: String, name: String }
+        courts: [{ type: Number, required: true }],
+        start: { type: Date, required: true },
+        end: { type: Date, required: true },
+        team1: { _id: { type: String, required: true }, name: { type: String, required: true } },
+        team2: { _id: { type: String, required: true }, name: { type: String, required: true } }
       }
     ],
     upcoming_matches: [
-      { team1: { id: String, name: String }, team2: { id: String, name: String } }
+      {
+        team1: { _id: { type: String, required: true }, name: { type: String, required: true } },
+        team2: { _id: { type: String, required: true }, name: { type: String, required: true } }
+      }
     ],
-    finished_matches: [{ team1: { id: String, name: String }, team2: { id: String, name: String } }]
+    finished_matches: [
+      {
+        team1: { _id: { type: String, required: true }, name: { type: String, required: true } },
+        team2: { _id: { type: String, required: true }, name: { type: String, required: true } }
+      }
+    ]
   },
   { collection: "details" }
 );
