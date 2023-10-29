@@ -37,6 +37,7 @@ export const actions = {
       // Set active tournament
       const tournament = (await getActiveTournament())!;
       Object.assign(currentTournament, tournament);
+      currentTournament.save();
     } else {
       // Create new tournament
       const tournament = new Tournament({

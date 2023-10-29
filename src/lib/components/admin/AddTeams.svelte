@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let teams = [];
+  import type { Team } from "$lib/types/teams";
+
+  export let teams: Team[];
 </script>
 
 <div class="forms">
@@ -10,8 +12,10 @@
     <input type="text" name="team-id" required />
     <button type="submit" class="submit">Add Team</button>
   </form>
+
   <h1>OR</h1>
-  <form class="add-team bulk" method="POST" action="?/addbulk">
+
+  <form class="add-team bulk" enctype="multipart/form-data" method="POST" action="?/addbulk">
     <label for="team-file">Upload CSV</label>
     <span class="help">
       <small><u>CSV Format</u></small>
@@ -38,14 +42,23 @@
     <button type="submit" class="submit">Add Teams</button>
   </form>
 </div>
+
 <br />
-<table class="teams">
-  <tr>
-    <th>Team Name</th>
-    <th>Team ID</th>
-  </tr>
-  {JSON.stringify(teams, null, " ")}
-</table>
+
+<div class="teams-container">
+  <table class="teams">
+    <tr>
+      <th>Team Name</th>
+      <th>Team ID</th>
+    </tr>
+    {#each teams as team}
+      <tr>
+        <td>{team.name}</td>
+        <td>{team._id}</td>
+      </tr>
+    {/each}
+  </table>
+</div>
 
 <style>
   .forms {
@@ -108,7 +121,32 @@
     padding: 0 5px;
   }
 
-  .teams {
+  .teams-container {
+    max-height: 500px;
+    overflow-y: scroll;
+    width: fit-content;
     margin: 0 auto;
+    scrollbar-width: unset;
+  }
+
+  .teams {
+    border-collapse: collapse;
+    margin: 10px auto;
+    min-width: 375px;
+  }
+
+  .teams > :first-child {
+    background-color: var(--color-1);
+    text-align: left;
+  }
+
+  .teams th,
+  .teams td {
+    padding: 12px 15px;
+  }
+
+  .teams tr {
+    border-bottom: 1px solid var(--color-1);
+    text-align: left;
   }
 </style>

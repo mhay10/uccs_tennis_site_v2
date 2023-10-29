@@ -2,6 +2,7 @@ import { currentTournament } from "$lib";
 import type { RequestEvent } from "@sveltejs/kit";
 import { addToArray } from "./admin";
 import { teams } from "$lib/stores/teams";
+import { parse } from "csv-parse/sync";
 
 export async function handleSingle({ request }: RequestEvent) {
   // Get data from request
@@ -20,6 +21,18 @@ export async function handleSingle({ request }: RequestEvent) {
   teams.set(currentTournament.teams);
 }
 
-export function handleBulk({ request }: RequestEvent) {
-  console.log("multiple");
+export async function handleBulk({ request }: RequestEvent) {
+  const data = Object.fromEntries(await request.formData());
+  const file = data["team-file"] as File;
+
+  const csv = parse(await file.text(), {
+    columns: ["name", "_id"],
+    skipEmptyLines: true,
+    from_line: 2
+  });
+
+  for (const team of csv) {
+    addToArray(currentTournament.teams, team);
+  }
+  currentTournament.save();
 }

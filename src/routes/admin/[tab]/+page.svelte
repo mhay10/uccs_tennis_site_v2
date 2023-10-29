@@ -12,7 +12,7 @@
 </script>
 
 {#if data.tab === "add-teams"}
-  <AddTeams />
+  <AddTeams teams={data.teams} />
 {:else if data.tab === "create-pools"}
   <CreatePools />
 {:else if data.tab === "manage-pools"}
