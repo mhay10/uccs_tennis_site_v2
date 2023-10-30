@@ -2,6 +2,26 @@
   import type { Team } from "$lib/types/teams";
 
   export let teams: Team[];
+
+  // Validates the file type of the uploaded CSV
+  function validateFiletype(e: any) {
+    const type = e.target.files[0].type;
+    const acceptedFiletypes = e.target.accept.split(",");
+    if (acceptedFiletypes.includes(type)) return;
+    else {
+      alert("Invalid file type. Please upload a CSV file.");
+      e.target.value = "";
+    }
+  }
+
+  // Stores whether each team should be deleted
+  let toBeDeleted: boolean[] = Array.from({ length: teams.length }, () => false);
+
+  // Selects all teams if the "Select All" checkbox is checked
+  function selectAll(e: any) {
+    if (e.target.checked) toBeDeleted = toBeDeleted.map(() => true);
+    else toBeDeleted = toBeDeleted.map(() => false);
+  }
 </script>
 
 <div class="forms">
@@ -10,6 +30,7 @@
     <input type="text" name="team-name" required />
     <label for="team-id">Team ID</label>
     <input type="text" name="team-id" required />
+
     <button type="submit" class="submit">Add Team</button>
   </form>
 
@@ -38,27 +59,44 @@
         </tr>
       </table>
     </span>
-    <input type="file" name="team-file" accept="text/csv" required />
+    <input
+      type="file"
+      name="team-file"
+      accept=".csv,text/csv,application/vnd.ms-excel"
+      on:change={validateFiletype}
+      required
+    />
+
     <button type="submit" class="submit">Add Teams</button>
   </form>
 </div>
 
 <br />
 
-<div class="teams-container">
-  <table class="teams">
-    <tr>
-      <th>Team Name</th>
-      <th>Team ID</th>
-    </tr>
-    {#each teams as team}
+<form class="manage-teams" method="POST" action="?/removeselected">
+  <button type="submit" class="submit">Remove Selected Teams</button>
+
+  <div class="teams-container">
+    <table class="teams">
       <tr>
-        <td>{team.name}</td>
-        <td>{team._id}</td>
+        <th>
+          <input type="checkbox" name="remove-all-teams" on:click={selectAll} />
+          Team Name
+        </th>
+        <th>Team ID</th>
       </tr>
-    {/each}
-  </table>
-</div>
+      {#each teams as team, i}
+        <tr on:click={() => (toBeDeleted[i] = !toBeDeleted[i])}>
+          <td>
+            <input type="checkbox" name="selected" value={team._id} bind:checked={toBeDeleted[i]} />
+            {team.name}
+          </td>
+          <td>{team._id}</td>
+        </tr>
+      {/each}
+    </table>
+  </div>
+</form>
 
 <style>
   .forms {
@@ -127,7 +165,7 @@
     overflow-y: auto;
     height: 400px;
     width: fit-content;
-    margin: 0 auto;
+    margin: 15px auto;
   }
 
   .teams {

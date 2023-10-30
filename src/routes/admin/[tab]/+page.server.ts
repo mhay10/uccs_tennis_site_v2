@@ -1,6 +1,6 @@
 import { currentTournament } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
-import { handleBulk, handleSingle } from "$lib/handlers/addteams.js";
+import { handleAddBulk, handeAddSingle, handleRemoveSelected } from "$lib/handlers/addteams.js";
 
 export async function load({ params }) {
   // Get tab from params
@@ -19,6 +19,7 @@ export async function load({ params }) {
 
 export const actions = {
   logout: handleLogoutForm,
-  addteam: handleSingle,
-  addbulk: handleBulk
+  addteam: handeAddSingle,
+  addbulk: handleAddBulk,
+  removeselected: handleRemoveSelected
 };
