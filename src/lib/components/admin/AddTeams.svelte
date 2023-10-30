@@ -122,31 +122,38 @@
   }
 
   .teams-container {
-    max-height: 500px;
-    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    height: 400px;
     width: fit-content;
     margin: 0 auto;
-    scrollbar-width: unset;
   }
 
   .teams {
     border-collapse: collapse;
-    margin: 10px auto;
-    min-width: 375px;
-  }
-
-  .teams > :first-child {
-    background-color: var(--color-1);
     text-align: left;
+    width: 375px;
   }
 
   .teams th,
   .teams td {
-    padding: 12px 15px;
+    padding: 5px;
+  }
+
+  .teams th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-1);
   }
 
   .teams tr {
     border-bottom: 1px solid var(--color-1);
-    text-align: left;
+    transition: background-color 0.13s ease-in-out;
+  }
+
+  .teams tr:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+    transition: background-color 0.13s ease-in-out;
   }
 </style>
