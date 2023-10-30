@@ -6,6 +6,8 @@
 
   let activeTournament = JSON.parse(data.activeTournament) as Tournament;
   let tournaments = JSON.parse(data.tournaments) as Tournament[];
+
+  console.log(activeTournament._id);
 </script>
 
 <form class="current-active" method="POST" action="?/tournament">

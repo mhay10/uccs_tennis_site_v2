@@ -1,8 +1,9 @@
 import { activeTournament, currentTournament } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
 import { getActiveTournament, getTournaments } from "$lib/handlers/admin";
-import { Tournament } from "$lib/models.js";
+import { Tournament } from "$lib/models";
 import { redirect } from "@sveltejs/kit";
+import type { Document } from "mongoose";
 
 export async function load({ cookies }) {
   // Check if admin is logged in
@@ -12,6 +13,7 @@ export async function load({ cookies }) {
   if (!cookie) throw redirect(302, "/admin/login");
 
   // Get tournaments
+  // FIXME: The tournament has to be selected twice before it is set as active
   const tournaments = await getTournaments(currentTournament._id);
   return {
     activeTournament: JSON.stringify(currentTournament),
@@ -33,14 +35,14 @@ export const actions = {
     const tournamentId = data["tournament-id"];
 
     // If tournamentName and tournamentId are empty, use existing tournament
+    let tournament: Document;
     if (!tournamentName && !tournamentId) {
       // Set active tournament
-      const tournament = (await getActiveTournament())!;
-      Object.assign(currentTournament, tournament);
-      currentTournament.save();
+      activeTournament.active_tournament = existingTournamentId;
+      tournament = (await getActiveTournament()) as Document;
     } else {
       // Create new tournament
-      const tournament = new Tournament({
+      tournament = new Tournament({
         _id: tournamentId,
         name: tournamentName
       });
@@ -50,6 +52,12 @@ export const actions = {
     // Set active tournament
     activeTournament.active_tournament = tournamentId || existingTournamentId;
     activeTournament.save();
+
+    // Set current tournament
+    Object.assign(currentTournament, tournament);
+    currentTournament.save();
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Redirect to add teams page
     throw redirect(302, "/admin/add-teams");
