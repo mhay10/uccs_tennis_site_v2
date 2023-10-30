@@ -1,4 +1,5 @@
 import { ActiveTournament, Tournament } from "$lib/models";
+import type { RequestEvent } from "@sveltejs/kit";
 
 export async function getActiveTournament() {
   const activeTournament = (await ActiveTournament.findById("ballin"))!;
@@ -18,3 +19,7 @@ export function addToArray(array: any[], item: any, identifier = "_id") {
   if (existing) Object.assign(existing, item);
   else array.push(item);
 }
+
+export async function handleSelectExistingTournament({ request }: RequestEvent) {}
+
+export async function handleCreateNewTournament({ request }: RequestEvent) {}

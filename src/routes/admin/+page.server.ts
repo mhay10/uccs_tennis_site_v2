@@ -1,9 +1,11 @@
-import { activeTournament, currentTournament } from "$lib";
+import { currentTournament } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
-import { getActiveTournament, getTournaments } from "$lib/handlers/admin";
-import { Tournament } from "$lib/models";
+import {
+  getTournaments,
+  handleCreateNewTournament,
+  handleSelectExistingTournament
+} from "$lib/handlers/admin";
 import { redirect } from "@sveltejs/kit";
-import type { Document } from "mongoose";
 
 export async function load({ cookies }) {
   // Check if admin is logged in
@@ -16,50 +18,13 @@ export async function load({ cookies }) {
   // FIXME: The tournament has to be selected twice before it is set as active
   const tournaments = await getTournaments(currentTournament._id);
   return {
-    activeTournament: JSON.stringify(currentTournament),
-    tournaments: JSON.stringify(tournaments)
+    currentTournament: currentTournament.toObject(),
+    tournaments: tournaments.map((t) => t.toObject())
   };
 }
 
 export const actions = {
   logout: handleLogoutForm,
-  tournament: async ({ request }) => {
-    // Get data from request
-    const data = Object.fromEntries(await request.formData()) as {
-      "existing-tournament-id": string;
-      "tournament-name": string;
-      "tournament-id": string;
-    };
-    const existingTournamentId = data["existing-tournament-id"];
-    const tournamentName = data["tournament-name"];
-    const tournamentId = data["tournament-id"];
-
-    // If tournamentName and tournamentId are empty, use existing tournament
-    let tournament: Document;
-    if (!tournamentName && !tournamentId) {
-      // Set active tournament
-      activeTournament.active_tournament = existingTournamentId;
-      tournament = (await getActiveTournament()) as Document;
-    } else {
-      // Create new tournament
-      tournament = new Tournament({
-        _id: tournamentId,
-        name: tournamentName
-      });
-      await tournament.save();
-    }
-
-    // Set active tournament
-    activeTournament.active_tournament = tournamentId || existingTournamentId;
-    activeTournament.save();
-
-    // Set current tournament
-    Object.assign(currentTournament, tournament);
-    currentTournament.save();
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Redirect to add teams page
-    throw redirect(302, "/admin/add-teams");
-  }
+  existingtournament: handleSelectExistingTournament,
+  newtournament: handleCreateNewTournament
 };

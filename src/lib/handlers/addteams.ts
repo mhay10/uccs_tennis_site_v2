@@ -15,7 +15,7 @@ export async function handeAddSingle({ request }: RequestEvent) {
   const teamName = data["team-name"];
   const teamId = data["team-id"];
   addToArray(currentTournament.teams, { name: teamName, _id: teamId });
-  currentTournament.save();
+  await currentTournament.save();
 
   // Set list of teams
   teams.set(currentTournament.teams);
@@ -37,7 +37,7 @@ export async function handleAddBulk({ request }: RequestEvent) {
   for (const team of csv) {
     addToArray(currentTournament.teams, team);
   }
-  currentTournament.save();
+  await currentTournament.save();
 
   // Set list of teams
   teams.set(currentTournament.teams);
@@ -50,7 +50,7 @@ export async function handleRemoveSelected({ request }: RequestEvent) {
 
   // Remove teams from tournament
   currentTournament.teams = currentTournament.teams.filter(({ _id }) => !selected.includes(_id));
-  currentTournament.save();
+  await currentTournament.save();
 
   // Set list of teams
   teams.set(currentTournament.teams);
