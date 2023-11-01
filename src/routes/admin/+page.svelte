@@ -1,17 +1,22 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
+  import type { ActionData, PageData } from "./$types";
 
   export let data: PageData;
+  export let form: ActionData;
 
   const { tournaments, currentTournament } = data;
 
-  console.log(currentTournament._id);
+  $: console.log(form);
 </script>
 
+<h2>Current Tournament</h2>
+<h4>{currentTournament.name}</h4>
+<br />
+
 <div class="forms">
-  <form class="select-existing" method="POST" action="?/existingtournanment">
+  <form class="select-existing" method="POST" action="?/existingtournament">
     <h3>Select Existing Tournament</h3>
-    <select name="existing-tournament-id">
+    <select name="tournament-id">
       <option selected value={currentTournament._id || -1}
         >{currentTournament.name || "-- Select Tournament --"}</option
       >
@@ -29,11 +34,11 @@
     <h3>Create New Tournament</h3>
     <span class="row">
       <label for="tournament-id">Tournament ID </label>
-      <input type="text" name="tournament-id" />
+      <input type="text" name="tournament-id" required />
     </span>
     <span class="row">
       <label for="tournament-name">Tournament Name </label>
-      <input type="text" name="tournament-name" />
+      <input type="text" name="tournament-name" required />
     </span>
 
     <button type="submit" class="submit">Save</button>

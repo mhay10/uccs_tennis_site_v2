@@ -1,10 +1,6 @@
 import { currentTournament } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
-import {
-  getTournaments,
-  handleCreateNewTournament,
-  handleSelectExistingTournament
-} from "$lib/handlers/admin";
+import { getTournaments, handleNewTournament, handleExistingTournament } from "$lib/handlers/admin";
 import { redirect } from "@sveltejs/kit";
 
 export async function load({ cookies }) {
@@ -25,6 +21,6 @@ export async function load({ cookies }) {
 
 export const actions = {
   logout: handleLogoutForm,
-  existingtournament: handleSelectExistingTournament,
-  newtournament: handleCreateNewTournament
+  existingtournament: handleExistingTournament,
+  newtournament: handleNewTournament
 };

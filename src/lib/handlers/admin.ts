@@ -1,5 +1,6 @@
+import { activeTournament, currentTournament } from "$lib";
 import { ActiveTournament, Tournament } from "$lib/models";
-import type { RequestEvent } from "@sveltejs/kit";
+import { fail, type RequestEvent } from "@sveltejs/kit";
 
 export async function getActiveTournament() {
   const activeTournament = (await ActiveTournament.findById("ballin"))!;
@@ -20,6 +21,45 @@ export function addToArray(array: any[], item: any, identifier = "_id") {
   else array.push(item);
 }
 
-export async function handleSelectExistingTournament({ request }: RequestEvent) {}
+export async function handleExistingTournament({ request }: RequestEvent) {
+  // Get data from request
+  const data = Object.fromEntries(await request.formData()) as { "tournament-id": string };
 
-export async function handleCreateNewTournament({ request }: RequestEvent) {}
+  // Get tournament
+  const tournament = (await Tournament.findById(data["tournament-id"]))!;
+
+  // Set tournament as active
+  activeTournament.active_tournament = tournament._id;
+  await activeTournament.save();
+
+  // Change to selected tournament
+  Object.assign(currentTournament, tournament);
+  await currentTournament.save();
+}
+
+export async function handleNewTournament({ request }: RequestEvent) {
+  // Get data from request
+  const data = Object.fromEntries(await request.formData()) as {
+    "tournament-id": string;
+    "tournament-name": string;
+  };
+
+  // Check if tournament already exists
+  const existingTournament = await Tournament.findById(data["tournament-id"]);
+  if (existingTournament) return fail(400, { message: "Tournament already exists" });
+
+  // Create new tournament
+  const tournament = new Tournament({
+    _id: data["tournament-id"],
+    name: data["tournament-name"]
+  });
+  await tournament.save();
+
+  // Set tournament as active
+  activeTournament.active_tournament = tournament._id;
+  await activeTournament.save();
+
+  // Change to selected tournament
+  Object.assign(currentTournament, tournament);
+  await currentTournament.save();
+}
