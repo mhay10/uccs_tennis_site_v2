@@ -18,7 +18,7 @@ export const tournamentSchema = new Schema(
     teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
     pools: [
       {
-        _id: { type: Number, required: true },
+        _id: { type: String, required: true },
         teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }]
       }
     ],
@@ -33,7 +33,7 @@ export const tournamentSchema = new Schema(
     // Scores
     pool_scores: [
       {
-        pool_id: { type: Number, required: true },
+        pool_id: { type: String, required: true },
         team1: { _id: { type: String, required: true }, score: { type: Number, required: true } },
         team2: { _id: { type: String, required: true }, score: { type: Number, required: true } },
         team1_score: { type: Number, required: true },

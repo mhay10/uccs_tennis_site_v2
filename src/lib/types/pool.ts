@@ -1,12 +1,12 @@
 import type { Team } from "./teams";
 
 export type Pool = {
-  _id: number;
+  _id: string;
   teams: Team[];
 };
 
 export type PoolScore = {
-  pool_id: number;
+  pool_id: string;
   team1: Team;
   team2: Team;
   team1_score: number;

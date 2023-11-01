@@ -1,10 +1,13 @@
 <script lang="ts">
   import type { Pool } from "$lib/types/pool";
+  import type { Team } from "$lib/types/teams";
   import { POOL_HEADERS, validateCSV } from "$lib/validate";
   import { parse } from "papaparse";
 
-  export let pools: Pool[];
-  $: console.log(pools);
+  export let teams: Team[];
+
+  // Stores if file can be uploaded
+  let validUpload = true;
 
   async function validateUpload(file: File) {
     // Check if file is a CSV
@@ -13,8 +16,29 @@
       // Get CSV data skipping the header row
       const text = await file.text();
       const rows = parse(text, { header: true, skipEmptyLines: false }).data.slice(0, -1);
-      console.log(rows);
-    } else alert("Invalid CSV format.\nReference the table above for correct format.");
+
+      // Merge rows into pools
+      let validTeams = true;
+      for (const row of rows) {
+        if (!validTeams) break;
+        // @ts-ignore
+        for (const teamId of Object.values(row)) {
+          // Find team with matching id
+          const team = teams.find((team) => team._id === teamId)!;
+
+          // Exit if team not found
+          if (!team) validTeams = false;
+        }
+      }
+
+      if (!validTeams) {
+        alert("Invalid team found. Please check the CSV file and try again.");
+        validUpload = false;
+      } else validUpload = true;
+    } else {
+      alert("Invalid CSV format.\nReference the table above for correct format.");
+      validUpload = false;
+    }
   }
 </script>
 
@@ -65,7 +89,7 @@
     required
   />
 
-  <button type="submit" class="submit">Create Pools</button>
+  <button type="submit" class="submit" disabled={!validUpload}>Create Pools</button>
 </form>
 
 <style>

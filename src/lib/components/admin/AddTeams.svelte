@@ -7,6 +7,9 @@
   // Stores whether each team should be deleted
   let toBeDeleted: boolean[] = Array.from({ length: teams.length }, () => false);
 
+  // Stores if file can be uploaded
+  let validUpload = true;
+
   // Selects all teams if the "Select All" checkbox is checked
   function selectAll(e: any) {
     if (e.target.checked) toBeDeleted = toBeDeleted.map(() => true);
@@ -17,8 +20,11 @@
   async function validateUpload(file: File) {
     // Check if file is a CSV
     const validFormat = await validateCSV(file, TEAM_HEADERS);
-    console.log(validFormat);
-    if (!validFormat) alert("Invalid CSV format.\nReference the table above for correct format.");
+    if (validFormat) validUpload = true;
+    else {
+      alert("Invalid CSV format.\nReference the table above for correct format.");
+      validUpload = false;
+    }
   }
 </script>
 
@@ -67,7 +73,7 @@
       required
     />
 
-    <button type="submit" class="submit">Add Teams</button>
+    <button type="submit" class="submit" disabled={!validUpload}>Add Teams</button>
   </form>
 </div>
 

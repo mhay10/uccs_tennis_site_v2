@@ -11,7 +11,6 @@ export async function load({ cookies }) {
   if (!cookie) throw redirect(302, "/admin/login");
 
   // Get tournaments
-  // FIXME: The tournament has to be selected twice before it is set as active
   const tournaments = await getTournaments(currentTournament._id);
   return {
     currentTournament: currentTournament.toObject(),
