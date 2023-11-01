@@ -1,8 +1,8 @@
 import { currentTournament } from "$lib";
 import type { RequestEvent } from "@sveltejs/kit";
 import { addToArray } from "./admin";
-import { teams } from "$lib/stores/teams";
-import { parse } from "csv-parse/sync";
+import { parse } from "papaparse";
+import type { Team } from "$lib/types/teams";
 
 export async function handeAddSingle({ request }: RequestEvent) {
   // Get data from request
@@ -16,9 +16,6 @@ export async function handeAddSingle({ request }: RequestEvent) {
   const teamId = data["team-id"];
   addToArray(currentTournament.teams, { name: teamName, _id: teamId });
   await currentTournament.save();
-
-  // Set list of teams
-  teams.set(currentTournament.teams);
 }
 
 export async function handleAddBulk({ request }: RequestEvent) {
@@ -27,20 +24,18 @@ export async function handleAddBulk({ request }: RequestEvent) {
   const file = data["team-file"] as File;
 
   // Parse CSV
-  const csv = parse(await file.text(), {
-    columns: ["name", "_id"],
-    skipEmptyLines: true,
-    from_line: 2
-  });
+  const text = await file.text();
+  const csv = parse(text, {
+    skipEmptyLines: false,
+    header: true
+    // @ts-ignore
+  }).data.slice(0, -1) as { "Team Name": string; "Team ID": string }[];
 
   // Add teams to tournament
   for (const team of csv) {
-    addToArray(currentTournament.teams, team);
+    addToArray(currentTournament.teams, { name: team["Team Name"], _id: team["Team ID"] });
   }
   await currentTournament.save();
-
-  // Set list of teams
-  teams.set(currentTournament.teams);
 }
 
 export async function handleRemoveSelected({ request }: RequestEvent) {
@@ -51,7 +46,4 @@ export async function handleRemoveSelected({ request }: RequestEvent) {
   // Remove teams from tournament
   currentTournament.teams = currentTournament.teams.filter(({ _id }) => !selected.includes(_id));
   await currentTournament.save();
-
-  // Set list of teams
-  teams.set(currentTournament.teams);
 }

@@ -5,16 +5,16 @@ import { handleAddBulk, handeAddSingle, handleRemoveSelected } from "$lib/handle
 export async function load({ params }) {
   // Get tab from params
   const { tab } = params;
-  const result: any = { tab };
 
-  // Get data for each tab
-  switch (tab) {
-    case "add-teams":
-      result.teams = currentTournament.teams.map(({ name, _id }) => ({ name, _id }));
-      break;
-  }
+  // Get teams and pools from current tournament
+  const teams = currentTournament.teams.map(({ name, _id }) => ({ name, _id }));
+  const pools = currentTournament.pools.map(({ teams, _id }) => ({ _id, teams }));
 
-  return result;
+  return {
+    tab,
+    teams,
+    pools
+  };
 }
 
 export const actions = {

@@ -1,18 +1,8 @@
 <script lang="ts">
   import type { Team } from "$lib/types/teams";
+  import { TEAM_HEADERS, validateCSV } from "$lib/validate";
 
   export let teams: Team[];
-
-  // Validates the file type of the uploaded CSV
-  function validateFiletype(e: any) {
-    const type = e.target.files[0].type;
-    const acceptedFiletypes = e.target.accept.split(",");
-    if (acceptedFiletypes.includes(type)) return;
-    else {
-      alert("Invalid file type. Please upload a CSV file.");
-      e.target.value = "";
-    }
-  }
 
   // Stores whether each team should be deleted
   let toBeDeleted: boolean[] = Array.from({ length: teams.length }, () => false);
@@ -21,6 +11,14 @@
   function selectAll(e: any) {
     if (e.target.checked) toBeDeleted = toBeDeleted.map(() => true);
     else toBeDeleted = toBeDeleted.map(() => false);
+  }
+
+  // Validate uploaded file
+  async function validateUpload(file: File) {
+    // Check if file is a CSV
+    const validFormat = await validateCSV(file, TEAM_HEADERS);
+    console.log(validFormat);
+    if (!validFormat) alert("Invalid CSV format.\nReference the table above for correct format.");
   }
 </script>
 
@@ -62,8 +60,10 @@
     <input
       type="file"
       name="team-file"
-      accept=".csv,text/csv,application/vnd.ms-excel"
-      on:change={validateFiletype}
+      accept="text/csv,text/plain"
+      on:change={(e) => {
+        if (e.currentTarget.files) validateUpload(e.currentTarget.files[0]);
+      }}
       required
     />
 
@@ -74,6 +74,8 @@
 <br />
 
 <form class="manage-teams" method="POST" action="?/removeselected">
+  <p>Number of Teams: {teams.length}</p>
+  <br />
   <button type="submit" class="submit">Remove Selected Teams</button>
 
   <div class="teams-container">
