@@ -4,6 +4,7 @@
   import { POOL_HEADERS, validateCSV } from "$lib/validate";
   import { parse } from "papaparse";
 
+  export let pools: Pool[];
   export let teams: Team[];
 
   // Stores if file can be uploaded
@@ -81,7 +82,7 @@
   </span>
   <input
     type="file"
-    name="team-file"
+    name="pool-file"
     accept="text/csv,text/plain"
     on:change={(e) => {
       if (e.currentTarget.files) validateUpload(e.currentTarget.files[0]);
@@ -91,6 +92,23 @@
 
   <button type="submit" class="submit" disabled={!validUpload}>Create Pools</button>
 </form>
+
+<br />
+
+<div class="pools">
+  {#each pools as pool}
+    <table class="pool">
+      <tr>
+        <th>{pool._id}</th>
+      </tr>
+      {#each pool.teams as team}
+        <tr>
+          <td>{team._id}</td>
+        </tr>
+      {/each}
+    </table>
+  {/each}
+</div>
 
 <style>
   .create-pools {
@@ -134,5 +152,27 @@
   .create-pools .help .example td {
     border: 1px solid var(--color-1);
     padding: 0 5px;
+  }
+
+  .pools {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .pool {
+    border-collapse: collapse;
+    border: 1px solid var(--color-1);
+  }
+
+  .pool th, .pool td {
+    border: 1px solid var(--color-1);
+    padding: 5px 25px;
+  }
+
+  .pool th {
+    background-color: var(--color-1);
   }
 </style>

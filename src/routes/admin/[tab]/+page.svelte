@@ -14,7 +14,7 @@
 {#if data.tab === "add-teams"}
   <AddTeams teams={data.teams} />
 {:else if data.tab === "create-pools"}
-  <CreatePools teams={data.teams} />
+  <CreatePools pools={data.pools} teams={data.teams} />
 {:else if data.tab === "manage-pools"}
   <ManagePools />
 {:else if data.tab === "create-brackets"}
