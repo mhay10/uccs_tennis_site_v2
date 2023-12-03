@@ -20,7 +20,7 @@
 {#if showAllPools}
   <small class="legend">
     <span class="red">Red = Top row team score</span>
-    <br />
+
     <span class="blue">Blue = Left column team score</span>
   </small>
   <div class="all-pools">
@@ -52,6 +52,7 @@
     justify-content: center;
     width: fit-content;
     margin: 0 auto;
+    margin-bottom: 5px;
   }
 
   .legend .red,
@@ -60,6 +61,7 @@
     width: 100%;
     border-radius: 5px;
     border: 1px solid var(--color-3);
+    margin: 0;
   }
 
   .legend .red {
@@ -67,7 +69,7 @@
   }
 
   .legend .blue {
-    background-color: rgba(0, 0, 255, 0.5);
+    background-color: rgba(0, 0, 255, 0.4);
   }
 
   .all-pools {
