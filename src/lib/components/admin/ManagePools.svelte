@@ -8,7 +8,7 @@
   export let pools: Pool[];
   export let teams: Team[];
 
-  let showAllPools = true;
+  let showAllPools = false;
 </script>
 
 <div class="select-mode">

@@ -20,17 +20,6 @@
       showScores = true;
     } else showScores = false;
   }
-
-  function handleSubmitScores(e: any) {
-    // Create form and add pool to it
-    const form = new FormData();
-    form.append("pool", JSON.stringify(pool));
-
-    // Submit form
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "?/updatepoolscores");
-    xhr.send(form);
-  }
 </script>
 
 <form class="enter-scores" method="POST" action="?/updatepoolscores">
@@ -51,7 +40,9 @@
 
     <input type="hidden" name="pool" value={JSON.stringify(pool)} />
 
-    <button type="submit" class="submit">Save</button>
+    {#if !readonly}
+      <button type="submit" class="submit">Save</button>
+    {/if}
   {/if}
 </form>
 

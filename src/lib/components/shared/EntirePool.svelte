@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Pool } from "$lib/types/pool";
-  import type { Team } from "$lib/types/teams";
 
   export let pool: Pool;
   export let readonly = false;
