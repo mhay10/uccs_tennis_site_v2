@@ -1,18 +1,16 @@
-import { currentTournament } from "$lib";
+import { currentTournament, serialize } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
 import { handleAddBulk, handeAddSingle, handleRemoveSelected } from "$lib/handlers/addteams.js";
 import { handleCreatePools } from "$lib/handlers/createpools.js";
+import { handleUpdateScores } from "$lib/handlers/managepools.js";
 
 export async function load({ params }) {
   // Get tab from params
   const { tab } = params;
 
   // Get teams and pools from current tournament
-  const teams = currentTournament.teams.map(({ name, _id }) => ({ name, _id }));
-  const pools = currentTournament.pools.map(({ teams, _id }) => ({
-    _id,
-    teams: teams.map(({ name, _id }) => ({ name, _id }))
-  }));
+  const teams = serialize(currentTournament.teams);
+  const pools = serialize(currentTournament.pools);
 
   return {
     tab,
@@ -26,5 +24,6 @@ export const actions = {
   addteam: handeAddSingle,
   addbulk: handleAddBulk,
   removeselected: handleRemoveSelected,
-  createpools: handleCreatePools
+  createpools: handleCreatePools,
+  updatepoolscores: handleUpdateScores
 };

@@ -13,3 +13,7 @@ export const currentTournament = (await getActiveTournament())!;
 export const activeTournament = (await ActiveTournament.findById("ballin"))!;
 
 db.once("open", () => console.log("DB connection open"));
+
+export function serialize(obj: any) {
+  return JSON.parse(JSON.stringify(obj));
+}

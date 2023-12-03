@@ -15,6 +15,9 @@ export async function handleCreatePools({ request }: RequestEvent) {
     header: true
   }).data.slice(0, -1) as any[];
 
+  // Empty pools
+  currentTournament.pools = [];
+
   // Create pools
   const pools = csv.reduce((pools, row) => {
     for (const [poolId, teamId] of Object.entries(row)) {
@@ -28,7 +31,23 @@ export async function handleCreatePools({ request }: RequestEvent) {
     }
 
     return pools;
-  }, []);
+  }, []) as Pool[];
+
+  // Create empty scores between teams
+  for (const pool of pools) {
+    pool.scores = [];
+
+    for (let i = 0; i < pool.teams.length; i++) {
+      for (let j = i + 1; j < pool.teams.length; j++) {
+        pool.scores.push({
+          team1: pool.teams[i],
+          team2: pool.teams[j],
+          team1_score: 0,
+          team2_score: 0
+        });
+      }
+    }
+  }
 
   // Save pools
   currentTournament.pools = pools;

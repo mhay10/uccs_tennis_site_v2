@@ -19,35 +19,56 @@ export const tournamentSchema = new Schema(
     pools: [
       {
         _id: { type: String, required: true },
-        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }]
+        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
+        scores: [
+          {
+            team1: {
+              type: {
+                _id: { type: String, required: true },
+                name: { type: String, required: true }
+              },
+              required: true
+            },
+            team2: {
+              type: {
+                _id: { type: String, required: true },
+                name: { type: String, required: true }
+              },
+              required: true
+            },
+            team1_score: { type: Number, required: true },
+            team2_score: { type: Number, required: true }
+          }
+        ]
       }
     ],
     brackets: [
       {
         _id: { type: Number, required: true },
         name: { type: String, required: true },
-        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }]
-      }
-    ],
-
-    // Scores
-    pool_scores: [
-      {
-        pool_id: { type: String, required: true },
-        team1: { _id: { type: String, required: true }, score: { type: Number, required: true } },
-        team2: { _id: { type: String, required: true }, score: { type: Number, required: true } },
-        team1_score: { type: Number, required: true },
-        team2_score: { type: Number, required: true }
-      }
-    ],
-    bracket_scores: [
-      {
-        bracket_id: { type: Number, required: true },
-        team1: { _id: { type: String, required: true }, score: { type: Number, required: true } },
-        team2: { _id: { type: String, required: true }, score: { type: Number, required: true } },
-        team1_score: { type: Number, required: true },
-        team2_score: { type: Number, required: true },
-        stage: { type: Number, required: true }
+        teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
+        scores: [
+          {
+            bracket_id: { type: Number, required: true },
+            team1: {
+              type: {
+                _id: { type: String, required: true },
+                name: { type: String, required: true }
+              },
+              required: true
+            },
+            team2: {
+              type: {
+                _id: { type: String, required: true },
+                name: { type: String, required: true }
+              },
+              required: true
+            },
+            team1_score: { type: Number, required: true },
+            team2_score: { type: Number, required: true },
+            stage: { type: Number, required: true }
+          }
+        ]
       }
     ],
 
@@ -90,3 +111,4 @@ export const tournamentSchema = new Schema(
   },
   { collection: "details" }
 );
+``
