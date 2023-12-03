@@ -18,6 +18,11 @@
 </div>
 
 {#if showAllPools}
+  <small class="legend">
+    <span class="red">Red = Top row team score</span>
+    <br />
+    <span class="blue">Blue = Left column team score</span>
+  </small>
   <div class="all-pools">
     {#each pools as pool}
       <div class="pool-scores">
@@ -40,6 +45,31 @@
     padding: 10px;
   }
 
+  .legend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .legend .red,
+  .legend .blue {
+    padding: 1px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--color-3);
+  }
+
+  .legend .red {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+
+  .legend .blue {
+    background-color: rgba(0, 0, 255, 0.5);
+  }
+
   .all-pools {
     display: flex;
     flex-wrap: wrap;
@@ -47,6 +77,6 @@
   }
 
   .pool-scores {
-    margin: 10px;
+    margin: 0 10px;
   }
 </style>

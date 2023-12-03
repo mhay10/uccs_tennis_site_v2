@@ -95,6 +95,10 @@
     width: 100%;
   }
 
+  .score {
+    padding-top: 1px;
+  }
+
   .score.top-row {
     background: red;
     grid-column: 2;
