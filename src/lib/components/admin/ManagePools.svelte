@@ -80,5 +80,6 @@
 
   .pool-scores {
     margin: 0 10px;
+    flex: 0 0 25%;
   }
 </style>

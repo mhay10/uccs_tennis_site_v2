@@ -30,6 +30,8 @@
             )}
             {@const topIsTeam1 = pool.scores[scoreIndex]?.team1._id === topRowTeam._id}
 
+            {scoreIndex}
+
             <div class="vs-score">
               <span class="score top-row">
                 {#if topIsTeam1}
@@ -71,8 +73,12 @@
 
 <style>
   .scores {
+    display: table;
     border-collapse: collapse;
+    margin: 0 auto;
     margin-bottom: 20px;
+    table-layout: fixed;
+    width: 100%;
   }
 
   .scores th,
@@ -91,7 +97,6 @@
 
   .vs-score {
     display: inline-grid;
-    width: 100%;
   }
 
   .score {
@@ -106,6 +111,10 @@
   .score.first-col {
     background: blue;
     grid-row: 2;
+  }
+
+  input[type="number"] {
+    width: 100%;
   }
 
   td:has(.na) {
