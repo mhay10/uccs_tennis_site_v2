@@ -9,6 +9,13 @@
 
   // Contains the current selected tab
   export let data: PageData;
+
+  // Global event listener for all input[type="number"] elements to select all text on focus
+  document.addEventListener(
+    "focus",
+    (e) => e.target instanceof HTMLInputElement && e.target.type === "number" && e.target.select(),
+    true
+  );
 </script>
 
 {#if data.tab === "add-teams"}

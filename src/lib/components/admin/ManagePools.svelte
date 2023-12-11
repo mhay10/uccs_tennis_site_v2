@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Pool, PoolScore } from "$lib/types/pool";
+  import type { Pool } from "$lib/types/pool";
   import type { Team } from "$lib/types/teams";
   import EntirePool from "../shared/EntirePool.svelte";
   import SelectTeam from "../shared/SelectTeam.svelte";
@@ -9,6 +9,23 @@
   export let teams: Team[];
 
   let showAllPools = false;
+
+  async function handleAllPoolsSubmit() {
+    const form = new FormData();
+    form.append("pools", JSON.stringify(pools));
+
+    const res = await fetch("?/updateallpools", {
+      method: "POST",
+      body: form
+    });
+
+    // Show success or failure message
+    if (res.ok && res.status === 200) alert("Successfully updated all pools");
+    else alert("Failed to update all pools");
+
+    // Clear the form
+    window.location.reload();
+  }
 </script>
 
 <div class="select-mode">
@@ -18,18 +35,21 @@
 </div>
 
 {#if showAllPools}
-  <small class="legend">
-    <span class="red">Red = Top row team score</span>
+  <form method="post" on:submit|preventDefault={handleAllPoolsSubmit}>
+    <button type="submit" class="submit">Update Pool Scores</button>
+    <small class="legend">
+      <span class="red">Red = Top row team score</span>
 
-    <span class="blue">Blue = Left column team score</span>
-  </small>
-  <div class="all-pools">
-    {#each pools as pool}
-      <div class="pool-scores">
-        <EntirePool {pool} />
-      </div>
-    {/each}
-  </div>
+      <span class="blue">Blue = Left column team score</span>
+    </small>
+    <div class="all-pools">
+      {#each pools as pool}
+        <div class="pool-scores">
+          <EntirePool bind:pool />
+        </div>
+      {/each}
+    </div>
+  </form>
 {:else}
   <SelectTeam {pools} {teams} />
 {/if}
@@ -43,6 +63,10 @@
 
   .select-mode * {
     padding: 10px;
+  }
+
+  .submit {
+    margin-bottom: 10px;
   }
 
   .legend {

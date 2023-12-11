@@ -20,9 +20,28 @@
       showScores = true;
     } else showScores = false;
   }
+
+  async function handleTeamScoresSubmit() {
+    // Create form data
+    const form = new FormData();
+    form.append("pool", JSON.stringify(pool));
+
+    // Send request
+    const res = await fetch("?/updateteamscores", {
+      method: "POST",
+      body: form
+    });
+
+    // Show success or failure message
+    if (res.ok && res.status === 200) alert("Successfully updated team scores");
+    else alert("Failed to update team scores");
+
+    // Clear the form
+    window.location.reload();
+  }
 </script>
 
-<form class="enter-scores" method="POST" action="?/updatepoolscores">
+<form class="enter-scores" method="POST" on:submit|preventDefault={handleTeamScoresSubmit}>
   <div class="select-team">
     <label for="team">Select Team</label>
     <select name="team" on:change={handleTeamSelect}>
@@ -36,9 +55,7 @@
   {#if showScores}
     {@const otherTeams = pool.teams.filter((t) => t._id !== team._id)}
 
-    <TeamScores {team} {otherTeams} {pool} {readonly} />
-
-    <input type="hidden" name="pool" value={JSON.stringify(pool)} />
+    <TeamScores {team} {otherTeams} bind:pool {readonly} />
 
     {#if !readonly}
       <button type="submit" class="submit">Save</button>
