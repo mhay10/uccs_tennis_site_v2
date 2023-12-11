@@ -50,7 +50,7 @@
 
   .scores th,
   .scores td {
-    padding: 5px 10px;
+    padding: 10px 20px;
     border: 1px solid var(--color-2);
   }
 
