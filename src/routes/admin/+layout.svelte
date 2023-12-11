@@ -44,7 +44,7 @@
           <li>
             <a
               href="/admin/manage-brackets"
-              class="tab {$page.url.pathname.endsWith('manage-bracket') ? 'active' : null}"
+              class="tab {$page.url.pathname.endsWith('manage-brackets') ? 'active' : null}"
               >Manage Brackets</a
             >
           </li>
