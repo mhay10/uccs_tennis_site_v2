@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Pool } from "$lib/types/pool";
+  import { onMount } from "svelte";
 
   export let pool: Pool;
   export let readonly = false;
@@ -29,8 +30,6 @@
                 (s.team1._id === topRowTeam._id && s.team2._id === team._id)
             )}
             {@const topIsTeam1 = pool.scores[scoreIndex]?.team1._id === topRowTeam._id}
-
-            {scoreIndex}
 
             <div class="vs-score">
               <span class="score top-row">

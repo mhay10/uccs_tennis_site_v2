@@ -5,14 +5,6 @@
   export let data: PageData;
 
   let poolIndex: number | null = null;
-
-  async function handlePoolChange(e: any) {
-    // TODO: Figure out why this is necessary
-    const index = e.target.value as number;
-    poolIndex = null;
-    await new Promise((r) => setTimeout(r, 50));
-    poolIndex = index;
-  }
 </script>
 
 <h2>Pool Play</h2>
@@ -31,18 +23,18 @@
 
 <div class="select-pool">
   <h3>Select Pool</h3>
-  <select class="selection" bind:value={poolIndex} on:change={handlePoolChange}>
+  <select class="selection" bind:value={poolIndex}>
     <option value={null}>-- Select Pool --</option>
     {#each data.pools as pool, i}
       <option value={i}>{pool._id}</option>
     {/each}
   </select>
 
-  {#if poolIndex != null}
-    <div class="pool">
-      <EntirePool pool={data.pools[poolIndex]} readonly={true} />
-    </div>
-  {/if}
+  {#each data.pools as pool, i}
+    {#if i === poolIndex}
+      <EntirePool {pool} readonly={true} />
+    {/if}
+  {/each}
 </div>
 
 <style>
