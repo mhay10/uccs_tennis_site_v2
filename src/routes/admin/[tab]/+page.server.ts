@@ -24,5 +24,6 @@ export const actions = {
   createpools: handleCreatePools,
   updateallpools: handleUpdateAllScores,
   updateteamscores: handleUpdateTeamScores,
-  createbrackets: handleCreateBrackets
+  createbrackets: handleCreateBrackets,
+  // populatebrackets: handlePopulateBrackets
 };
