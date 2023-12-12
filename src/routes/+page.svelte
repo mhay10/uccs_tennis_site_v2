@@ -8,8 +8,13 @@
 
 <img src={uccsStatue} alt="UCCS Statue" />
 <h2>Welcome to the UCCS Home Tournament</h2>
-<p>Click on <b>Pool Play</b> or <b>Bracket Play</b> to view current scores.</p>
-<p>Click on <b>Schedule</b> to view court availbility and upcoming matches</p>
+<p>
+  Click on <a href="/poolplay"><b>Pool Play</b></a> or
+  <a href="/bracketplay"><b>Bracket Play</b></a> to view current scores.
+</p>
+<p>
+  Click on <a href="/schedule"><b>Schedule</b></a>0 to view court availbility and upcoming matches
+</p>
 
 <style>
   img {
@@ -25,5 +30,9 @@
   p {
     margin: 0;
     padding: 1rem;
+  }
+
+  a {
+    color: #000;
   }
 </style>

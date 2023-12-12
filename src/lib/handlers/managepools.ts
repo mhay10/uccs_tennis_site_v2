@@ -1,6 +1,6 @@
-import { currentTournament } from "$lib";
-import type { Pool } from "$lib/types/pool";
-import type { RequestEvent } from "@sveltejs/kit";
+import {currentTournament} from "$lib";
+import type {Pool} from "$lib/types/pool";
+import type {RequestEvent} from "@sveltejs/kit";
 
 export async function handleUpdateAllScores({ request }: RequestEvent) {
   // Get pools from request

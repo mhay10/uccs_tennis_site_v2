@@ -2,8 +2,8 @@
   import type { Pool } from "$lib/types/pool";
   import type { Team } from "$lib/types/teams";
   import EntirePool from "../shared/EntirePool.svelte";
-  import SelectTeam from "../shared/SelectTeam.svelte";
-  import Toggle from "../shared/Toggle.svelte";
+  import SelectTeam from "./SelectTeam.svelte";
+  import Toggle from "./Toggle.svelte";
 
   export let pools: Pool[];
   export let teams: Team[];

@@ -1,4 +1,4 @@
-import type { Team } from "./teams";
+import type {Team} from "./teams";
 
 export type Pool = {
   _id: string;

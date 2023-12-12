@@ -1,6 +1,6 @@
-import { activeTournament, currentTournament } from "$lib";
-import { ActiveTournament, Tournament } from "$lib/models";
-import { fail, type RequestEvent } from "@sveltejs/kit";
+import {activeTournament, currentTournament} from "$lib";
+import {ActiveTournament, Tournament} from "$lib/models";
+import {fail, type RequestEvent} from "@sveltejs/kit";
 
 export async function getActiveTournament() {
   const activeTournament = (await ActiveTournament.findById("ballin"))!;

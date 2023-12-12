@@ -2,6 +2,7 @@ import { currentTournament, serialize } from "$lib";
 import { handleLogoutForm } from "$lib/auth.js";
 import { handleAddBulk, handeAddSingle, handleRemoveSelected } from "$lib/handlers/addteams.js";
 import { handleCreatePools } from "$lib/handlers/createpools.js";
+import { handleCreateBrackets } from "$lib/handlers/createbrackets.js";
 import { handleUpdateAllScores, handleUpdateTeamScores } from "$lib/handlers/managepools.js";
 
 export async function load({ params }) {
@@ -22,5 +23,6 @@ export const actions = {
   removeselected: handleRemoveSelected,
   createpools: handleCreatePools,
   updateallpools: handleUpdateAllScores,
-  updateteamscores: handleUpdateTeamScores
+  updateteamscores: handleUpdateTeamScores,
+  createbrackets: handleCreateBrackets
 };

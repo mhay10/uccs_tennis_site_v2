@@ -1,7 +1,7 @@
-import { currentTournament } from "$lib";
-import type { Pool } from "$lib/types/pool";
-import type { RequestEvent } from "@sveltejs/kit";
-import { parse } from "papaparse";
+import {currentTournament} from "$lib";
+import type {Pool} from "$lib/types/pool";
+import type {RequestEvent} from "@sveltejs/kit";
+import {parse} from "papaparse";
 
 export async function handleCreatePools({ request }: RequestEvent) {
   // Get data from request

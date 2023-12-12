@@ -1,7 +1,7 @@
-import { currentTournament } from "$lib";
-import type { RequestEvent } from "@sveltejs/kit";
-import { addToArray } from "./admin";
-import { parse } from "papaparse";
+import {currentTournament} from "$lib";
+import type {RequestEvent} from "@sveltejs/kit";
+import {addToArray} from "./admin";
+import {parse} from "papaparse";
 
 export async function handeAddSingle({ request }: RequestEvent) {
   // Get data from request

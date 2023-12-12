@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { DB_URL, DB_USERNAME, DB_PASSWORD } from "$env/static/private";
-import { getActiveTournament } from "./handlers/admin";
-import { ActiveTournament } from "./models";
+import {DB_PASSWORD, DB_URL, DB_USERNAME} from "$env/static/private";
+import {getActiveTournament} from "./handlers/admin";
+import {ActiveTournament} from "./models";
 
 mongoose.set("debug", true);
 
