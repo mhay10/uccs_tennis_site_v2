@@ -2,6 +2,7 @@
   import Toggle from "./Toggle.svelte";
   import { bracketNames } from "$lib/handlers/createbrackets";
   import type { Team } from "$lib/types/teams";
+  import SelectBracket from "$lib/components/shared/SelectBracket.svelte";
 
   export let teams: Team[];
 
@@ -69,7 +70,7 @@
     <button type="submit" class="submit" disabled={!canSubmit}>Create Pre-Brackets</button>
   </form>
 {:else}
-  <h1>Populate Dose BRackets</h1>
+  <SelectBracket />
 {/if}
 
 <style>

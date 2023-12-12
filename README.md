@@ -1,6 +1,22 @@
 # UCCS Tennis Site V2
 
-A website for managing multiple World Team Tennis (WTT) tournaments and providing a public view of courts and scores of the currently active tournament
+A website for managing multiple World Team Tennis (WTT) tournaments and providing a public view of courts and scores of the currently active tournament.
+
+## Installation
+
+The website uses a `.env` file to store database credentials and other sensitive information. The `.env` file should be located in the root directory of the project. The following variables are used:
+
+
+```bash
+# MongoDB connection details
+DB_URL="<database_url>"
+DB_USERNAME="<database_username>"
+DB_PASSWORD="<database_password>"
+
+# Credentials to access admin page
+ADMIN_USERNAME="<admin_username>"
+ADMIN_PASSWORD="<admin_password>"
+```
 
 ## Database
 
@@ -28,6 +44,23 @@ The website uses a MongoDB document database. Each tournament document uses the 
 	upcoming_matches: [{ team1, team2 }],
 	finished_matches: [{ team1, team2 }]
 }
+```
+
+There is also another document that stores the current active tournament id. This document uses the following structure:
+
+```json
+{
+    _id: "ballin",
+    active_tournament: "tournament_id"
+}
+```
+
+The website uses the following collection format:
+```yaml
+# Database name
+tournaments:
+    current_active # Stores the current active tournament id
+    details # Stores the details of each tournament
 ```
 
 ## Calculations

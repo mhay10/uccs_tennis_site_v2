@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import {DB_PASSWORD, DB_URL, DB_USERNAME} from "$env/static/private";
-import {getActiveTournament} from "./handlers/admin";
-import {ActiveTournament} from "./models";
+import { DB_PASSWORD, DB_URL, DB_USERNAME } from "$env/static/private";
+import { getActiveTournament } from "./handlers/admin";
+import { ActiveTournament } from "./models";
 
 mongoose.set("debug", true);
 
-mongoose.connect(DB_URL, { user: DB_USERNAME, pass: DB_PASSWORD });
+await mongoose.connect(DB_URL, { user: DB_USERNAME, pass: DB_PASSWORD });
 const db = mongoose.connection;
 db.useDb("tournaments");
 
