@@ -4,8 +4,9 @@ import { handleAddBulk, handeAddSingle, handleRemoveSelected } from "$lib/handle
 import { handleCreatePools } from "$lib/handlers/createpools.js";
 import { handleCreateBrackets } from "$lib/handlers/createbrackets.js";
 import { handleUpdateAllScores, handleUpdateTeamScores } from "$lib/handlers/managepools.js";
+import type { RequestEvent } from "@sveltejs/kit";
 
-export async function load({ params }) {
+export async function load({ params }: RequestEvent) {
   // Get tab from params
   const { tab } = params;
 
@@ -24,6 +25,8 @@ export const actions = {
   createpools: handleCreatePools,
   updateallpools: handleUpdateAllScores,
   updateteamscores: handleUpdateTeamScores,
-  createbrackets: handleCreateBrackets,
+  createbrackets: handleCreateBrackets
   // populatebrackets: handlePopulateBrackets
 };
+
+export const ssr = false;
