@@ -67,7 +67,8 @@ export const tournamentSchema = new Schema(
             team2_score: { type: Number, required: true },
             stage: { type: Number, required: true }
           }
-        ]
+        ],
+        prebracket: { type: Boolean, required: true }
       }
     ],
 

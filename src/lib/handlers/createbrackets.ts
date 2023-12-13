@@ -25,7 +25,8 @@ export async function handleCreateBrackets({ request }: RequestEvent) {
         _id: `temp${i + 1}`,
         name: `Temp ${i + 1}`
       })),
-      scores: []
+      scores: [],
+      prebracket: true
     };
 
     // Add bracket to tournament

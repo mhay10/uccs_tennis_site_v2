@@ -14,7 +14,6 @@ export type PoolScore = {
 }
 
 export type PoolResult = {
-  _id: string;
   team: Team;
   games_won: number;
   games_lost: number;

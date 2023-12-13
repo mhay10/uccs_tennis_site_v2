@@ -3,6 +3,8 @@ import type { Team } from "./teams";
 export type Bracket = {
   _id: string;
   teams: Team[];
+  scores: BracketScore[];
+  prebracket: boolean;
 };
 
 export type BracketScore = {

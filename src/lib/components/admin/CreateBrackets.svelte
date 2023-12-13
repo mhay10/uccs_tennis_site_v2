@@ -2,11 +2,15 @@
   import Toggle from "./Toggle.svelte";
   import type { Team } from "$lib/types/teams";
   import SelectBracket from "$lib/components/shared/SelectBracket.svelte";
-  import { bracketNames } from "$lib/types/bracket";
+  import { bracketNames, type Bracket } from "$lib/types/bracket";
+  import PopulateBrackets from "./PopulateBrackets.svelte";
+  import type { Pool } from "$lib/types/pool";
 
   export let teams: Team[];
+  export let pools: Pool[];
+  export let brackets: Bracket[];
 
-  let populateBrackets = false;
+  let populateBrackets = true;
 
   // Only submit when all teams are accounted for
   let canSubmit = false;
@@ -70,7 +74,7 @@
     <button type="submit" class="submit" disabled={!canSubmit}>Create Pre-Brackets</button>
   </form>
 {:else}
-  <SelectBracket />
+  <PopulateBrackets {teams} {pools} {brackets} />
 {/if}
 
 <style>
