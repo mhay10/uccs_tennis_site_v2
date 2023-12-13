@@ -1,8 +1,8 @@
 <script lang="ts">
   import Toggle from "./Toggle.svelte";
-  import { bracketNames } from "$lib/handlers/createbrackets";
   import type { Team } from "$lib/types/teams";
   import SelectBracket from "$lib/components/shared/SelectBracket.svelte";
+  import { bracketNames } from "$lib/types/bracket";
 
   export let teams: Team[];
 

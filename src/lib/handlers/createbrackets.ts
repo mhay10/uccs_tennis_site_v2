@@ -1,7 +1,6 @@
-import type { Team } from "$lib/types/teams";
+import { currentTournament } from "$lib";
+import { bracketNames } from "$lib/types/bracket";
 import type { RequestEvent } from "@sveltejs/kit";
-
-export const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];
 
 export async function handleCreateBrackets({ request }: RequestEvent) {
   // Get data from request
@@ -15,20 +14,22 @@ export async function handleCreateBrackets({ request }: RequestEvent) {
       .map((key) => ({ [key]: Number(formData[key]) }))
   };
 
-  // Create brackets
-  const brackets = [];
+  // Create and save brackets
+  currentTournament.brackets = [];
   for (let i = 0; i < data.numBrackets; i++) {
+    // Create bracket with placeholder teams
     const numTeams = data.brackets[i][bracketNames[i]];
-
-    brackets.push({
-      name: bracketNames[i],
+    const bracket = {
+      _id: bracketNames[i],
       teams: Array.from({ length: numTeams }, (_, i) => ({
-        _id: i.toString(),
+        _id: `temp${i + 1}`,
         name: `Temp ${i + 1}`
       })),
       scores: []
-    });
-  }
+    };
 
-  console.log(JSON.stringify(brackets, null, 2));
+    // Add bracket to tournament
+    currentTournament.brackets.push(bracket);
+  }
+  await currentTournament.save();
 }

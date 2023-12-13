@@ -44,7 +44,7 @@ export const tournamentSchema = new Schema(
     ],
     brackets: [
       {
-        _id: { type: Number, required: true },
+        _id: { type: String, required: true },
         teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
         scores: [
           {
@@ -110,4 +110,4 @@ export const tournamentSchema = new Schema(
   },
   { collection: "details" }
 );
-``
+``;

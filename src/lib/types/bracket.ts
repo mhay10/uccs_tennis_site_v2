@@ -1,8 +1,7 @@
-import type {Team} from "./teams";
+import type { Team } from "./teams";
 
 export type Bracket = {
   _id: string;
-  name: string;
   teams: Team[];
 };
 
@@ -14,3 +13,5 @@ export type BracketScore = {
   team2_score: number;
   stage: number;
 };
+
+export const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];

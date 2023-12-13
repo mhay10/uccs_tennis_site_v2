@@ -28,5 +28,3 @@ export const actions = {
   createbrackets: handleCreateBrackets
   // populatebrackets: handlePopulateBrackets
 };
-
-export const ssr = false;
