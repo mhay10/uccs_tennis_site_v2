@@ -3,6 +3,8 @@
  * It is used to test the tournament bracket.
  */
 
+const { get } = require("mongoose");
+
 // Use the tournament database
 use("tournaments");
 
@@ -30,9 +32,8 @@ function createRandomScores(pools) {
   // Create random scores for each pool
   for (const pool of modifiedPools) {
     for (const score of pool.scores) {
-      const num = getRandomInt(0, 30);
-      score.team1_score = num;
-      score.team2_score = 30 - num;
+      score.team1_score = getRandomInt(0, 30);
+      score.team2_score = getRandomInt(0, 30);
     }
   }
 

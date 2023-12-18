@@ -4,23 +4,20 @@
   import type { Team } from "$lib/types/teams";
 
   export let pools: Pool[];
-  export let teams: Team[];  
+  export let teams: Team[];
   export let brackets: Bracket[];
 
-  async function handleCalculatePositions(pools: Pool[]) {
-    const formData = new FormData();
-    formData.append("pools", JSON.stringify(pools));
+  async function handleCalculatePositions() {
+    const res = await fetch("/api/calculations/pool_results", { method: "POST" });
 
-    const res = await fetch("?/calculatepools", {
-      method: "POST",
-      body: formData
-    });
-
-    console.log(res.ok);
+    if (res.ok) {
+      const data = await res.json();
+      console.log(data);
+    } else alert("Something went wrong");
   }
 </script>
 
-<button on:click={() => handleCalculatePositions(pools)}>Calculate Positions</button>
+<button on:click={handleCalculatePositions}>Calculate Positions</button>
 
 <div class="brackets">
   {#each brackets as bracket}
