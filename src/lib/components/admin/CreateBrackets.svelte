@@ -7,7 +7,6 @@
   import type { Pool } from "$lib/types/pool";
 
   export let teams: Team[];
-  export let pools: Pool[];
   export let brackets: Bracket[];
 
   let populateBrackets = true;
@@ -74,7 +73,7 @@
     <button type="submit" class="submit" disabled={!canSubmit}>Create Pre-Brackets</button>
   </form>
 {:else}
-  <PopulateBrackets {teams} {pools} {brackets} />
+  <PopulateBrackets {brackets} />
 {/if}
 
 <style>

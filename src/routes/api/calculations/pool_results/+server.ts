@@ -1,10 +1,15 @@
 import { currentTournament } from "$lib";
+import { checkCookieValue } from "$lib/auth";
 import type { Pool, PoolResult, PoolScore } from "$lib/types/pool";
 import type { Team } from "$lib/types/teams";
 import { json, type RequestEvent } from "@sveltejs/kit";
 
-export async function POST({ request }: RequestEvent) {
+export async function POST({ request, cookies }: RequestEvent) {
   // Check if request is authorized
+  const token = cookies.get("auth_token");
+  if (!token || (token && !checkCookieValue(token))) {
+    return json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   // Get pools from database
   const pools = currentTournament.pools;
@@ -54,8 +59,6 @@ export async function POST({ request }: RequestEvent) {
 
   // Sort merged pool results
   mergedPoolResults.sort((team1, team2) => team2.winPercent - team1.winPercent);
-
-  console.log(mergedPoolResults.length, mergedPoolResults);
 
   return json({ poolResults: mergedPoolResults.map((result) => result.team) });
 }
