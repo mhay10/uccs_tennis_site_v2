@@ -27,7 +27,7 @@
 {:else if data.tab === "create-brackets"}
   <CreateBrackets brackets={data.brackets} teams={data.teams} />
 {:else if data.tab === "manage-brackets"}
-  <ManageBrackets />
+  <ManageBrackets brackets={data.brackets} />
 {:else if data.tab === "manage-schedule"}
   <ManageSchedule />
 {/if}

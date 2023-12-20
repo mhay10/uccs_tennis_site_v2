@@ -57,9 +57,8 @@ export async function POST({ request, cookies }: RequestEvent) {
     mergedPoolResults.push(...winPercents);
   }
 
-  // Sort merged pool results
+  // Sort and return merged pool results
   mergedPoolResults.sort((team1, team2) => team2.winPercent - team1.winPercent);
-
   return json({ poolResults: mergedPoolResults.map((result) => result.team) });
 }
 
