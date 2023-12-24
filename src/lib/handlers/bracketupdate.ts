@@ -57,17 +57,24 @@ export function getLoserBracketTeams(scores: BracketMatch[][]) {
   const firstRoundTeams = getLosers(firstRound, scores, 0);
   const secondRoundTeams = getLosers(secondRound, scores, 1);
 
+  const seenTeams = new Set<string>();
   for (let i = 0; i < firstRoundTeams.length; i++) {
     const team = firstRoundTeams[i];
+    const newTeam = secondRoundTeams[Math.floor(i / 2)];
 
-    // Skip if valid team
-    if (team._id !== bye._id && team._id !== pending._id) {
-      console.log("Exiting", team._id);
-      continue;
+    if (!seenTeams.has(newTeam._id) && (team._id === pending._id || team._id === bye._id)) {
+      // Get previous match
+      const prevMatch = firstRound.find(
+        (match) =>
+          (match.team1._id === newTeam._id && match.team2._id === bye._id) ||
+          (match.team2._id === newTeam._id && match.team1._id === bye._id)
+      );
+
+      if (prevMatch) firstRoundTeams[i] = newTeam;
+      else firstRoundTeams[i] = bye;
+
+      seenTeams.add(newTeam._id);
     }
-
-    const j = Math.floor(i / 2);
-    firstRoundTeams[i] = secondRoundTeams[j];
   }
 
   return firstRoundTeams;

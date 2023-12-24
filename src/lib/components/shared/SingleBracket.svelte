@@ -16,12 +16,13 @@
     const losersBracketTeams = getLoserBracketTeams(winnersBracket);
     losersBracket = createBracket(losersBracket, losersBracketTeams, 1);
 
+    console.log(losersBracketTeams.map((team) => team._id));
+
+    // Combine the brackets into one
     bracket.scores = [...losersBracket.reverse(), ...winnersBracket];
   }
 
   function getColor(index: number, size: number = bracket.scores.length) {
-    console.log(index);
-
     const middle = Math.floor(size / 2);
 
     const newColors = stageColors
@@ -35,7 +36,6 @@
 <div class="bracket">
   {#each bracket.scores as round, i}
     <div class="round">
-      <h3>Round {i}</h3>
       {#each round as match}
         <div class="match" style="background-color: {getColor(i)};">
           <div class="team">
