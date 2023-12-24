@@ -8,7 +8,7 @@ export type Bracket = {
 };
 
 export type BracketScores = {
-  [round: number]: BracketMatch[];
+  [round: string]: BracketMatch[];
 };
 
 export type BracketMatch = {

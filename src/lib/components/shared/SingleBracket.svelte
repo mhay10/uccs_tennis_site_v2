@@ -1,64 +1,70 @@
 <script lang="ts">
-  import { createFirstRound, createNextRound } from "$lib/handlers/bracketupdate";
-  import { stageColors, type Bracket } from "$lib/types/bracket";
-  import { onMount } from "svelte";
+  import { createMatches, sortRounds } from "$lib/handlers/bracketupdate";
+  import { stageColors, type Bracket, bye, type BracketScores } from "$lib/types/bracket";
 
   export let bracket: Bracket;
   export let readonly = false;
 
-  onMount(() => {
-    bracket.scores = createFirstRound(bracket.teams);
+  $: {
+    // Update bracket with new matches
+    bracket.scores = createMatches(bracket.scores, bracket.teams);
 
-    const numRounds = Math.ceil(Math.log2(bracket.teams.length));
-    for (let i = 1; i < numRounds; i++) {
-      const roundNum = i - 1;
+    // Merge second round losers into first round losers
+    const losersStart = bracket.scores["l1"];
+    const secondRoundLosers = bracket.scores["l0.5"];
 
-      bracket.scores = {
-        ...bracket.scores,
-        ...createNextRound(bracket.scores[roundNum], roundNum, bracket.scores[roundNum - 1]),
-        ...createNextRound(bracket.scores[-roundNum], -roundNum)
-      };
+    for (let i = 0; i < losersStart.length; i++) {
+      // Get the loser from the second round
+      const index = Math.floor(i / 2);
+      const loser = secondRoundLosers[index];
+
+      // Replace bye with loser
+      if (i % 2 == 0) {
+        if (losersStart[i].team1._id === bye._id) losersStart[i].team1 = loser.team1;
+        else losersStart[i].team2 = loser.team1;
+      } else {
+        if (losersStart[i].team1._id === bye._id) losersStart[i].team1 = loser.team2;
+        else losersStart[i].team2 = loser.team2;
+      }
     }
 
-    bracket.scores = bracket.scores;
-  });
+    // const losersScores = Object.keys(bracket.scores)
+    //   .filter((round) => round[0] === "l" && round !== "l0.5")
+    //   .reduce((acc, round) => {
+    //     acc[round] = bracket.scores[round];
+    //     return acc;
+    //   }, {} as BracketScores);
 
-  function handleEnterScore(roundNum: number) {
-    bracket.scores = {
-      ...bracket.scores,
-      ...createNextRound(bracket.scores[roundNum], roundNum, bracket.scores[roundNum - 1]),
-      ...createNextRound(bracket.scores[-roundNum], -roundNum)
-    };
+    // console.log(losersScores);
+    // bracket.scores = {
+    //   ...bracket.scores,
+    //   ...createMatches(losersScores, bracket.teams)
+    // };
+
+    // console.log(bracket.scores);
+  }
+
+  function getColor(round: string) {
+    if (round[0] === "l") round = round.slice(1);
+    return stageColors[+round % stageColors.length];
   }
 </script>
 
 <div class="bracket">
   {#each Object.keys(bracket.scores)
-    .sort((a, b) => +a - +b)
-    .map(Number) as round}
+    .filter((round) => round != "l0.5")
+    .sort(sortRounds) as round}
     <div class="round">
+      <h3>{round}</h3>
       {#each bracket.scores[round] as match}
-        <div
-          class="match"
-          style="background-color: {stageColors[Math.abs(round) % stageColors.length]};"
-        >
+        <div class="match" style="background-color: {getColor(round)};">
           <div class="team">
             <p>{match.team1._id}</p>
-            <input
-              type="number"
-              bind:value={match.team1_score}
-              {readonly}
-              on:input={() => handleEnterScore(round)}
-            />
+            <input type="number" bind:value={match.team1_score} {readonly} />
           </div>
           <div class="team">
             <p>{match.team2._id}</p>
-            <input
-              type="number"
-              bind:value={match.team2_score}
-              {readonly}
-              on:input={() => handleEnterScore(round)}
-            />
+            <input type="number" bind:value={match.team2_score} {readonly} />
           </div>
         </div>
       {/each}
