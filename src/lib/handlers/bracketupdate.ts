@@ -7,37 +7,25 @@ import {
 } from "$lib/types/bracket";
 import type { Team } from "$lib/types/teams";
 
-export function sortRounds(a: string, b: string) {
-  // Sort by round from losers to winners
-  if (a[0] === "l" && b[0] !== "l") return -1;
-  if (a[0] !== "l" && b[0] === "l") return 1;
-  if (a[0] === "l" && b[0] === "l") return +b.slice(1) - +a.slice(1);
-  return +a - +b;
-}
-
-export function createMatches(
-  scores: BracketScores,
+export function createBracket(
+  scores: BracketMatch[][],
   teams: Team[],
-  round = "0",
-  losersBracket = false
-): BracketScores {
-  if (teams.length === 1) return {};
+  round = 0
+): BracketMatch[][] {
+  if (teams.length === 1) return [];
 
-  // First round setup
-  if (round === "0") {
-    // Add byes to make number of teams a power of 2
+  if (round === 0) {
+    // Make number of teams power of 2
     const numByes = 2 ** Math.ceil(Math.log2(teams.length)) - teams.length;
-    if (numByes > 0) for (let i = 0; i < numByes; i++) teams.push(bye);
+    teams = [...teams, ...Array(numByes).fill(bye)];
 
-    // Shuffle teams by seed
+    // Shuffle teams
     teams = shuffleTeams(teams);
   }
 
   // Create matches
-  const roundKey = losersBracket ? `l${round.slice(1)}` : round;
-  const existingMatches = scores[roundKey] || [];
-  const matches: BracketMatch[] = [];
-
+  const existingMatches = scores[round] || [];
+  const matches = [];
   for (let i = 0; i < teams.length; i += 2) {
     const team1 = teams[i];
     const team2 = teams[i + 1];
@@ -45,42 +33,44 @@ export function createMatches(
     // Check if match already exists
     const existingMatch = existingMatches.find(
       (match) =>
-        (match.team1 === team1 && match.team2 === team2) ||
-        (match.team1 === team2 && match.team2 === team1)
+        (match.team1._id === team1._id && match.team2._id === team2._id) ||
+        (match.team2._id === team1._id && match.team1._id === team2._id)
     );
 
     // Add match to matches
-    if (existingMatch) matches.push(existingMatch);
-    else matches.push({ team1, team2, team1_score: 0, team2_score: 0 });
+    matches.push(existingMatch || { team1, team2, team1_score: 0, team2_score: 0 });
   }
 
-  // Return only current round if round if losers from second round
-  if (round === "l0.5") return { [roundKey]: matches };
-
   // Create next round
-  const winnersNext = createMatches(scores, getWinners(matches), `${+round + 1}`);
-  let losersStart = {};
-  let secondLosersStart = {};
-  let losersNext = {};
+  const nextRound = createBracket(scores, getWinners(matches), round + 1);
 
-  if (round === "0")
-    losersStart = createMatches(scores, getLosers(matches, scores, round), "l1", true);
-  if (round === "1")
-    secondLosersStart = createMatches(scores, getLosers(matches, scores, round), "l0.5", true);
-  if (losersBracket)
-    losersNext = createMatches(scores, getWinners(matches), `l${+round.slice(1) + 1}`, true);
+  return [matches, ...nextRound];
+}
 
-  // Return matches
-  return {
-    // Current round
-    [roundKey]: matches,
+export function getLoserBracketTeams(scores: BracketMatch[][]) {
+  const firstRound = scores[0];
+  const secondRound = scores[1];
 
-    // Next rounds
-    ...winnersNext,
-    ...losersStart,
-    ...secondLosersStart,
-    ...losersNext
-  };
+  if (!firstRound || !secondRound) return [];
+
+  // Get teams from first round
+  const firstRoundTeams = getLosers(firstRound, scores, 0);
+  const secondRoundTeams = getLosers(secondRound, scores, 1);
+
+  for (let i = 0; i < firstRoundTeams.length; i++) {
+    const team = firstRoundTeams[i];
+
+    // Skip if valid team
+    if (team._id !== bye._id && team._id !== pending._id) {
+      console.log("Exiting", team._id);
+      continue;
+    }
+
+    const j = Math.floor(i / 2);
+    firstRoundTeams[i] = secondRoundTeams[j];
+  }
+
+  return firstRoundTeams;
 }
 
 function shuffleTeams(teams: Team[]) {
@@ -128,7 +118,7 @@ function getWinners(matches: BracketMatch[]) {
   return winners;
 }
 
-function getLosers(currentRound: BracketMatch[], scores: BracketScores, round: string) {
+function getLosers(currentRound: BracketMatch[], scores: BracketMatch[][], round: number) {
   const losers = currentRound.map((match) => {
     // Return bye if either team is bye
     if (match.team1._id === bye._id || match.team2._id === bye._id) return bye;
@@ -141,14 +131,15 @@ function getLosers(currentRound: BracketMatch[], scores: BracketScores, round: s
     if (match.team2_score < match.team1_score) loser = match.team2;
 
     // Check if loser had bye in previous round
-    if (loser._id != pending._id && round === "1") {
-      const prevMatch = scores["0"]?.find(
-        (prevMatch) =>
-          (prevMatch.team1._id === loser._id && prevMatch.team2._id === bye._id) ||
-          (prevMatch.team2._id === loser._id && prevMatch.team1._id === bye._id)
+    if (round === 1) {
+      const previousRound = scores[round - 1];
+      const previousMatch = previousRound.find(
+        (match) =>
+          (match.team1._id === bye._id && match.team2._id === loser?._id) ||
+          (match.team2._id === bye._id && match.team1._id === loser?._id)
       );
 
-      if (prevMatch) return loser;
+      if (previousMatch) return loser;
     }
 
     return loser;
