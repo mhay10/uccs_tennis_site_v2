@@ -14,21 +14,22 @@
 
     // Create the losers bracket based on the winners bracket
     const losersBracketTeams = getLoserBracketTeams(winnersBracket);
-    losersBracket = createBracket(losersBracket, losersBracketTeams, 1);
-
-    console.log(losersBracketTeams.map((team) => team._id));
+    losersBracket = createBracket(losersBracket, losersBracketTeams, 1, true);
 
     // Combine the brackets into one
-    bracket.scores = [...losersBracket.reverse(), ...winnersBracket];
+    bracket.scores = [...losersBracket.toReversed(), ...winnersBracket];
   }
 
   function getColor(index: number, size: number = bracket.scores.length) {
+    // Get the middle index of the array
     const middle = Math.floor(size / 2);
 
+    // Create a new array with the colors in the correct order
     const newColors = stageColors
       .slice(0, middle + 1)
-      .concat(stageColors.slice(0, middle).reverse());
+      .concat(stageColors.slice(0, middle).toReversed());
 
+    // Return correct color
     return newColors[index];
   }
 </script>
@@ -64,12 +65,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* height: 100%; */
   }
 
   .match {
     margin: 10px;
     border: 1px solid var(--color-2);
+    padding: 0 5px;
   }
 
   .team {

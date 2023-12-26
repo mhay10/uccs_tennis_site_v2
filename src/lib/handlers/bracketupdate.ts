@@ -1,16 +1,11 @@
-import {
-  bye,
-  type BracketScores,
-  type BracketMatch,
-  pending,
-  type Bracket
-} from "$lib/types/bracket";
+import { bye, type BracketMatch, pending, type Bracket } from "$lib/types/bracket";
 import type { Team } from "$lib/types/teams";
 
 export function createBracket(
   scores: BracketMatch[][],
   teams: Team[],
-  round = 0
+  round = 0,
+  losersBracket = false
 ): BracketMatch[][] {
   if (teams.length === 1) return [];
 
@@ -24,7 +19,7 @@ export function createBracket(
   }
 
   // Create matches
-  const existingMatches = scores[round] || [];
+  const existingMatches = scores[losersBracket ? round - 1 : round] || [];
   const matches = [];
   for (let i = 0; i < teams.length; i += 2) {
     const team1 = teams[i];
@@ -42,7 +37,7 @@ export function createBracket(
   }
 
   // Create next round
-  const nextRound = createBracket(scores, getWinners(matches), round + 1);
+  const nextRound = createBracket(scores, getWinners(matches), round + 1, losersBracket);
 
   return [matches, ...nextRound];
 }
