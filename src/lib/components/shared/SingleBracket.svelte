@@ -36,9 +36,18 @@
 
 <div class="bracket">
   {#each bracket.scores as round, i}
+    {@const middle = Math.floor(bracket.scores.length / 2)}
+    {@const isLosers = i <= middle && i !== 0}
+    {@const isWinners = i >= middle && i !== bracket.scores.length - 1}
+
     <div class="round">
       {#each round as match}
-        <div class="match" style="background-color: {getColor(i)};">
+        <div
+          class="match"
+          class:losers={isLosers}
+          class:winners={isWinners}
+          style="background-color: {getColor(i)};"
+        >
           <div class="team">
             <p>{match.team1._id}</p>
             <input type="number" bind:value={match.team1_score} {readonly} />
@@ -68,9 +77,10 @@
   }
 
   .match {
-    margin: 10px;
+    margin: 5px;
     border: 1px solid var(--color-2);
     padding: 0 5px;
+    position: relative;
   }
 
   .team {
