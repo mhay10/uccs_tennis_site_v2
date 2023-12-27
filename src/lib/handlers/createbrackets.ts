@@ -33,4 +33,10 @@ export async function handleCreateBrackets({ request }: RequestEvent) {
     currentTournament.brackets.push(bracket);
   }
   await currentTournament.save();
+
+  // Return success
+  return {
+    success: true,
+    message: "Brackets created successfully!"
+  };
 }

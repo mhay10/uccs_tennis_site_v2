@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import type { Pool } from "$lib/types/pool";
   import type { Team } from "$lib/types/teams";
   import { POOL_HEADERS, validateCSV } from "$lib/validate";
@@ -43,7 +44,13 @@
   }
 </script>
 
-<form class="create-pools" enctype="multipart/form-data" method="POST" action="?/createpools">
+<form
+  class="create-pools"
+  enctype="multipart/form-data"
+  method="POST"
+  action="?/createpools"
+  use:enhance
+>
   <label for="team-file">Upload CSV</label>
   <span class="help">
     <small><u>CSV Format</u></small>
@@ -167,7 +174,8 @@
     border: 1px solid var(--color-1);
   }
 
-  .pool th, .pool td {
+  .pool th,
+  .pool td {
     border: 1px solid var(--color-1);
     padding: 5px 25px;
   }

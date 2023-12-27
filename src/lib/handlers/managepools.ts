@@ -1,6 +1,6 @@
-import {currentTournament} from "$lib";
-import type {Pool} from "$lib/types/pool";
-import type {RequestEvent} from "@sveltejs/kit";
+import { currentTournament } from "$lib";
+import type { Pool } from "$lib/types/pool";
+import type { RequestEvent } from "@sveltejs/kit";
 
 export async function handleUpdateAllScores({ request }: RequestEvent) {
   // Get pools from request
@@ -13,6 +13,12 @@ export async function handleUpdateAllScores({ request }: RequestEvent) {
     currentPool.scores = pool.scores;
   }
   await currentTournament.save();
+
+  // Return success
+  return {
+    success: true,
+    message: "Successfully updated all pool scores"
+  };
 }
 
 export async function handleUpdateTeamScores({ request }: RequestEvent) {
@@ -24,4 +30,10 @@ export async function handleUpdateTeamScores({ request }: RequestEvent) {
   const currentPool = currentTournament.pools.find(({ _id }) => _id === pool._id)!;
   currentPool.scores = pool.scores;
   await currentTournament.save();
+
+  // Return success
+  return {
+    success: true,
+    message: "Successfully updated pool scores"
+  };
 }

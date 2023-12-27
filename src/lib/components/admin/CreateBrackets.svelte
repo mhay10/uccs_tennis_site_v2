@@ -5,11 +5,12 @@
   import { bracketNames, type Bracket } from "$lib/types/bracket";
   import PopulateBrackets from "./PopulateBrackets.svelte";
   import type { Pool } from "$lib/types/pool";
+  import { enhance } from "$app/forms";
 
   export let teams: Team[];
   export let brackets: Bracket[];
 
-  let populateBrackets = true;
+  let populateBrackets = false;
 
   // Only submit when all teams are accounted for
   let canSubmit = false;
@@ -46,7 +47,7 @@
 </div>
 
 {#if !populateBrackets}
-  <form action="?/createbrackets" method="post">
+  <form action="?/createbrackets" method="post" use:enhance>
     <label for="numBrackets">Number of Brackets</label>
     <div class="counter">
       <button type="button" class="operator" on:click={removeBracket}><h2>-</h2></button>

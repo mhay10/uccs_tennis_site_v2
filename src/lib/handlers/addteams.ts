@@ -1,7 +1,7 @@
-import {currentTournament} from "$lib";
-import type {RequestEvent} from "@sveltejs/kit";
-import {addToArray} from "./admin";
-import {parse} from "papaparse";
+import { currentTournament } from "$lib";
+import type { RequestEvent } from "@sveltejs/kit";
+import { addToArray } from "./admin";
+import { parse } from "papaparse";
 
 export async function handeAddSingle({ request }: RequestEvent) {
   // Get data from request
@@ -35,6 +35,12 @@ export async function handleAddBulk({ request }: RequestEvent) {
     addToArray(currentTournament.teams, { name: team["Team Name"], _id: team["Team ID"] });
   }
   await currentTournament.save();
+
+  // Return success
+  return {
+    success: true,
+    message: "Teams added successfully"
+  };
 }
 
 export async function handleRemoveSelected({ request }: RequestEvent) {
@@ -45,4 +51,10 @@ export async function handleRemoveSelected({ request }: RequestEvent) {
   // Remove teams from tournament
   currentTournament.teams = currentTournament.teams.filter(({ _id }) => !selected.includes(_id));
   await currentTournament.save();
+
+  // Return success
+  return {
+    success: true,
+    message: "Teams removed successfully"
+  };
 }

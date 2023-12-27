@@ -5,7 +5,7 @@ import { handleCreatePools } from "$lib/handlers/createpools.js";
 import { handleCreateBrackets } from "$lib/handlers/createbrackets.js";
 import { handleUpdateAllScores, handleUpdateTeamScores } from "$lib/handlers/managepools.js";
 import type { RequestEvent } from "@sveltejs/kit";
-import { handleCalculatePools } from "$lib/handlers/populatebrackets";
+import { handlePopulateBrackets } from "$lib/handlers/populatebrackets";
 
 export async function load({ params }: RequestEvent) {
   // Get tab from params
@@ -15,7 +15,6 @@ export async function load({ params }: RequestEvent) {
   const teams = serialize(currentTournament.teams);
   const pools = serialize(currentTournament.pools);
   const brackets = serialize(currentTournament.brackets);
-
 
   return { tab, teams, pools, brackets };
 }
@@ -29,5 +28,5 @@ export const actions = {
   updateallpools: handleUpdateAllScores,
   updateteamscores: handleUpdateTeamScores,
   createbrackets: handleCreateBrackets,
-  calculatepools: handleCalculatePools,
+  populatebrackets: handlePopulateBrackets
 };

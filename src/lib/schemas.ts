@@ -47,26 +47,26 @@ export const tournamentSchema = new Schema(
         _id: { type: String, required: true },
         teams: [{ _id: { type: String, required: true }, name: { type: String, required: true } }],
         scores: [
-          {
-            bracket_id: { type: Number, required: true },
-            team1: {
-              type: {
-                _id: { type: String, required: true },
-                name: { type: String, required: true }
+          [
+            {
+              team1: {
+                type: {
+                  _id: { type: String, required: true },
+                  name: { type: String, required: true }
+                },
+                required: true
               },
-              required: true
-            },
-            team2: {
-              type: {
-                _id: { type: String, required: true },
-                name: { type: String, required: true }
+              team2: {
+                type: {
+                  _id: { type: String, required: true },
+                  name: { type: String, required: true }
+                },
+                required: true
               },
-              required: true
-            },
-            team1_score: { type: Number, required: true },
-            team2_score: { type: Number, required: true },
-            stage: { type: Number, required: true }
-          }
+              team1_score: { type: Number, required: true },
+              team2_score: { type: Number, required: true }
+            }
+          ]
         ],
         prebracket: { type: Boolean, required: true }
       }

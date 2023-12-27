@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import type { Pool } from "$lib/types/pool";
   import type { Team } from "$lib/types/teams";
   import TeamScores from "./TeamScores.svelte";
@@ -41,7 +42,7 @@
   }
 </script>
 
-<form class="enter-scores" method="POST" on:submit|preventDefault={handleTeamScoresSubmit}>
+<form class="enter-scores" method="POST" on:submit|preventDefault={handleTeamScoresSubmit} use:enhance>
   <div class="select-team">
     <label for="team">Select Team</label>
     <select name="team" on:change={handleTeamSelect}>

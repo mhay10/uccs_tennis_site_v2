@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import type { Team } from "$lib/types/teams";
   import { TEAM_HEADERS, validateCSV } from "$lib/validate";
 
@@ -40,7 +41,13 @@
 
   <h1>OR</h1>
 
-  <form class="add-team bulk" enctype="multipart/form-data" method="POST" action="?/addbulk">
+  <form
+    class="add-team bulk"
+    enctype="multipart/form-data"
+    method="POST"
+    action="?/addbulk"
+    use:enhance
+  >
     <label for="team-file">Upload CSV</label>
     <span class="help">
       <small><u>CSV Format</u></small>
@@ -79,7 +86,7 @@
 
 <br />
 
-<form class="manage-teams" method="POST" action="?/removeselected">
+<form class="manage-teams" method="POST" action="?/removeselected" use:enhance>
   <p>Number of Teams: {teams.length}</p>
   <br />
   <button type="submit" class="submit">Remove Selected Teams</button>

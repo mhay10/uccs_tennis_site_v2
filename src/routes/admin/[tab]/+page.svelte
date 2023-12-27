@@ -1,14 +1,19 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
+  import type { ActionData, PageData } from "./$types";
   import AddTeams from "$lib/components/admin/AddTeams.svelte";
   import CreatePools from "$lib/components/admin/CreatePools.svelte";
   import ManagePools from "$lib/components/admin/ManagePools.svelte";
   import CreateBrackets from "$lib/components/admin/CreateBrackets.svelte";
   import ManageBrackets from "$lib/components/admin/ManageBrackets.svelte";
   import ManageSchedule from "$lib/components/admin/ManageSchedule.svelte";
+  import { page } from "$app/stores";
 
   // Contains the current selected tab
   export let data: PageData;
+
+  export let form: ActionData;
+
+  $: if (form?.success) alert(form.message);
 
   // Global event listener for all input[type="number"] elements to select all text on focus
   document.addEventListener(
