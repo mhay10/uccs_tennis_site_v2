@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getLoserBracketTeams, createBracket } from "$lib/handlers/bracketupdate";
   import { stageColors, type Bracket, type BracketMatch } from "$lib/types/bracket";
+  import { afterUpdate } from "svelte";
 
   export let bracket: Bracket;
   export let readonly = false;
@@ -40,14 +41,9 @@
     {@const isLosers = i <= middle && i !== 0}
     {@const isWinners = i >= middle && i !== bracket.scores.length - 1}
 
-    <div class="round">
+    <div class="round" class:winners={isWinners} class:losers={isLosers}>
       {#each round as match}
-        <div
-          class="match"
-          class:losers={isLosers}
-          class:winners={isWinners}
-          style="background-color: {getColor(i)};"
-        >
+        <div class="match" style="background-color: {getColor(i)};">
           <div class="team">
             <p>{match.team1._id}</p>
             <input type="number" bind:value={match.team1_score} {readonly} />
@@ -77,7 +73,7 @@
   }
 
   .match {
-    margin: 5px;
+    margin: 6px 8px;
     border: 1px solid var(--color-2);
     padding: 0 5px;
     position: relative;
@@ -94,5 +90,62 @@
   .team * {
     margin: 0;
     padding-right: 10px;
+  }
+
+  .round.winners .match::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 50%;
+    height: 100%;
+  }
+
+  .round.losers .match::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    width: 50%;
+    height: 100%;
+  }
+
+  .round.winners:nth-last-child(2) .match::after,
+  .round.losers:nth-child(2) .match::before {
+    height: 200%;
+  }
+
+  /* Winners Bracket Connections */
+  .round.winners .match:nth-of-type(odd)::after {
+    top: 50%;
+    border-top: 1px solid var(--color-2);
+    border-right: 1px solid var(--color-2);
+  }
+
+  .round.winners .match:nth-of-type(even)::after {
+    top: -50%;
+    border-bottom: 1px solid var(--color-2);
+    border-right: 1px solid var(--color-2);
+  }
+
+  .round.winners:nth-last-child(2) .match:nth-of-type(even)::after {
+    top: -150%;
+  }
+
+  /* Losers Bracket Connections */
+  .round.losers .match:nth-of-type(odd)::before {
+    top: 50%;
+    border-top: 1px solid var(--color-2);
+    border-left: 1px solid var(--color-2);
+    z-index: -1;
+  }
+
+  .round.losers .match:nth-of-type(even)::before {
+    top: -50%;
+    border-bottom: 1px solid var(--color-2);
+    border-left: 1px solid var(--color-2);
+    z-index: -1;
+  }
+
+  .round.losers:nth-child(2) .match:nth-of-type(even)::before {
+    top: -150%;
   }
 </style>
