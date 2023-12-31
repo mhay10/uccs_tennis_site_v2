@@ -32,7 +32,9 @@ The website uses a MongoDB document database. Each tournament document uses the 
 	// Team Organization
 	teams: [{ id, name }],
 	pools: [{ id, [teams], [{ team1, team2, team1_score, team2_score }] }],
-	brackets: [{ id, [teams], [{ team1, team2, team1_score, team2_score }] }],
+	brackets: [{ id, [teams], [ 
+		[{ team1, team2, team1_score, team2_score }] 
+	], prebracket: boolean }],
 
 	// Pool play results
 	pool_results: [sorted/ranked teams],
@@ -50,7 +52,7 @@ There is also another document that stores the current active tournament id. Thi
 
 ```json
 {
-    _id: "ballin",
+    _id: "ballin", // This is the ID that it used in code
     active_tournament: "tournament_id"
 }
 ```

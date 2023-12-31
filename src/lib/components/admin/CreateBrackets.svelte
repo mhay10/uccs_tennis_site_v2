@@ -10,7 +10,7 @@
   export let teams: Team[];
   export let brackets: Bracket[];
 
-  let populateBrackets = false;
+  let populateBrackets = true;
 
   // Only submit when all teams are accounted for
   let canSubmit = false;

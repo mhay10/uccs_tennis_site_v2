@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import type { Bracket } from "$lib/types/bracket";
   import type { Team } from "$lib/types/teams";
   import { onMount } from "svelte";
@@ -36,7 +37,7 @@
   });
 </script>
 
-<form action="?/populatebrackets" method="post">
+<form action="?/populatebrackets" method="post" use:enhance>
   <div class="brackets">
     {#each brackets as bracket}
       <table class="bracket">
@@ -50,6 +51,8 @@
           </tr>
         {/each}
       </table>
+
+      <input type="hidden" name={bracket._id} value={JSON.stringify(bracket)} />
     {/each}
   </div>
 
