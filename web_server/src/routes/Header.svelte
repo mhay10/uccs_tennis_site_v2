@@ -29,6 +29,6 @@
 		<NavLi href="/">Home</NavLi>
 		<NavLi href="/schedule">Schedule</NavLi>
 		<NavLi href="/poolplay">Pool Play</NavLi>
-		<NavLi href="/bracketplay">Brackets</NavLi>
+		<NavLi href="/bracketplay">Bracket Play</NavLi>
 	</NavUl>
 </Navbar>

@@ -8,7 +8,7 @@
 	<h1 class="mt-10 text-2xl">Welcome to the UCCS Club Tennis Tournament</h1>
 	<p class="mt-5">
 		Click on <a class="underline" href="/poolplay">Pool Play</a> or
-		<a class="underline" href="/bracket">Brackets</a>
+		<a class="underline" href="/bracket">Bracket Play</a>
 		to see the current scores.
 		<br />
 		Click on <a class="underline" href="/schedule">Schedule</a> to see courts, match times and upcoming
