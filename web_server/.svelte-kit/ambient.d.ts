@@ -26,6 +26,7 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const npm_package_devDependencies_svelte_coreui_icons: string;
 	export const USER: string;
 	export const npm_config_user_agent: string;
 	export const GIT_ASKPASS: string;
@@ -43,7 +44,9 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_eslint_plugin_svelte: string;
 	export const ZSH: string;
 	export const LSCOLORS: string;
+	export const npm_package_devDependencies_flowbite_svelte: string;
 	export const PAGER: string;
+	export const NODE_OPTIONS: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const npm_package_devDependencies_svelte_check: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
@@ -52,6 +55,7 @@ declare module '$env/static/private' {
 	export const npm_config_engine_strict: string;
 	export const WSL_DISTRO_NAME: string;
 	export const COLORTERM: string;
+	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_devDependencies_typescript: string;
 	export const WAYLAND_DISPLAY: string;
 	export const npm_package_scripts_dev: string;
@@ -64,11 +68,13 @@ declare module '$env/static/private' {
 	export const _: string;
 	export const npm_package_private: string;
 	export const npm_package_scripts_check_watch: string;
+	export const npm_package_devDependencies_autoprefixer: string;
 	export const USER_ZDOTDIR: string;
 	export const npm_package_scripts_lint: string;
 	export const npm_package_devDependencies__typescript_eslint_eslint_plugin: string;
 	export const npm_config_registry: string;
 	export const TERM: string;
+	export const npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 	export const npm_config_node_gyp: string;
 	export const PATH: string;
 	export const npm_package_name: string;
@@ -76,6 +82,7 @@ declare module '$env/static/private' {
 	export const XDG_RUNTIME_DIR: string;
 	export const npm_config_frozen_lockfile: string;
 	export const DISPLAY: string;
+	export const npm_package_devDependencies_postcss_load_config: string;
 	export const LANG: string;
 	export const VSCODE_INJECTION: string;
 	export const npm_package_devDependencies_eslint: string;
@@ -91,12 +98,15 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_build: string;
 	export const npm_package_devDependencies_svelte: string;
 	export const npm_package_devDependencies_tslib: string;
+	export const VSCODE_INSPECTOR_OPTIONS: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const npm_package_scripts_format: string;
 	export const PWD: string;
 	export const npm_execpath: string;
 	export const ZDOTDIR: string;
+	export const npm_package_devDependencies_flowbite: string;
 	export const npm_package_devDependencies__sveltejs_adapter_auto: string;
+	export const npm_package_devDependencies_postcss: string;
 	export const npm_command: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
 	export const npm_package_scripts_preview: string;
@@ -106,6 +116,7 @@ declare module '$env/static/private' {
 	export const WSLENV: string;
 	export const npm_package_devDependencies__types_eslint: string;
 	export const INIT_CWD: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -137,6 +148,7 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		npm_package_devDependencies_svelte_coreui_icons: string;
 		USER: string;
 		npm_config_user_agent: string;
 		GIT_ASKPASS: string;
@@ -154,7 +166,9 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_eslint_plugin_svelte: string;
 		ZSH: string;
 		LSCOLORS: string;
+		npm_package_devDependencies_flowbite_svelte: string;
 		PAGER: string;
+		NODE_OPTIONS: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		npm_package_devDependencies_svelte_check: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
@@ -163,6 +177,7 @@ declare module '$env/dynamic/private' {
 		npm_config_engine_strict: string;
 		WSL_DISTRO_NAME: string;
 		COLORTERM: string;
+		npm_package_devDependencies_tailwindcss: string;
 		npm_package_devDependencies_typescript: string;
 		WAYLAND_DISPLAY: string;
 		npm_package_scripts_dev: string;
@@ -175,11 +190,13 @@ declare module '$env/dynamic/private' {
 		_: string;
 		npm_package_private: string;
 		npm_package_scripts_check_watch: string;
+		npm_package_devDependencies_autoprefixer: string;
 		USER_ZDOTDIR: string;
 		npm_package_scripts_lint: string;
 		npm_package_devDependencies__typescript_eslint_eslint_plugin: string;
 		npm_config_registry: string;
 		TERM: string;
+		npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 		npm_config_node_gyp: string;
 		PATH: string;
 		npm_package_name: string;
@@ -187,6 +204,7 @@ declare module '$env/dynamic/private' {
 		XDG_RUNTIME_DIR: string;
 		npm_config_frozen_lockfile: string;
 		DISPLAY: string;
+		npm_package_devDependencies_postcss_load_config: string;
 		LANG: string;
 		VSCODE_INJECTION: string;
 		npm_package_devDependencies_eslint: string;
@@ -202,12 +220,15 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_build: string;
 		npm_package_devDependencies_svelte: string;
 		npm_package_devDependencies_tslib: string;
+		VSCODE_INSPECTOR_OPTIONS: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		npm_package_scripts_format: string;
 		PWD: string;
 		npm_execpath: string;
 		ZDOTDIR: string;
+		npm_package_devDependencies_flowbite: string;
 		npm_package_devDependencies__sveltejs_adapter_auto: string;
+		npm_package_devDependencies_postcss: string;
 		npm_command: string;
 		PNPM_SCRIPT_SRC_DIR: string;
 		npm_package_scripts_preview: string;
@@ -217,6 +238,7 @@ declare module '$env/dynamic/private' {
 		WSLENV: string;
 		npm_package_devDependencies__types_eslint: string;
 		INIT_CWD: string;
+		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
