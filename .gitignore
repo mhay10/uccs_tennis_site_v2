@@ -1,9 +1,9 @@
 # Web server
 web_server/.DS_Store
 web_server/node_modules
-web_server//build
-web_server//.svelte-kit
-web_server//package
+web_server/build
+web_server/.svelte-kit
+web_server/package
 web_server/.env
 web_server/.env.*
 web_server/!.env.example
