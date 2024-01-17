@@ -6,7 +6,7 @@
 
 <Header />
 
-<main class="mt-5 text-center">
+<main class="mb-5 mt-5 text-center">
 	<slot />
 </main>
 
