@@ -1,6 +1,10 @@
 {
-	"/": [
-		"src/routes/+page.server.ts"
+	"/": [],
+	"/api/clear": [
+		"src/routes/api/clear/+server.ts"
+	],
+	"/api/upload": [
+		"src/routes/api/upload/+server.ts"
 	],
 	"/bracketplay": [],
 	"/poolplay": [],
