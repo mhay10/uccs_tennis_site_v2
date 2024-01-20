@@ -1,16 +1,26 @@
 import express from "express";
 import fg from "fast-glob";
 import { writeFile, unlink } from "fs/promises";
+import cors from "cors";
 
 // Create a new express instance
 const app = express();
 const port = 3000;
 
 // Serve static files from the public directory
-app.use(express.static("public"));
+app.use(
+  express.static("public", {
+    setHeaders: (res) => {
+      res.set("Access-Control-Allow-Origin", "*");
+    },
+  })
+);
 
 // Parse JSON bodies
 app.use(express.json({ limit: "300kb" }));
+
+// Enable CORS
+app.use(cors());
 
 // Create route for uploading files
 app.post("/upload", async (req, res) => {

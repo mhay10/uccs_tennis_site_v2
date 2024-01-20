@@ -17,16 +17,15 @@ The Excel file serves are the core hub for managing scores, brackets, and the sc
 
 ### Web Server
 
-The web server is responsible for presenting the tournament information in a user-friendly manner. It receives relevant tables from the Excel file and displays them on a web interface accessible to users.
+The web server is responsible for presenting the tournament information in a user-friendly manner. It receives relevant tables from the Excel file and displays them on a web interface accessible to users. The web server consists of two main components aswell: a static frontend and an asset server.
 
 <u>**Features**</u>
 
 - **User-Friendly Display:** Presents pools, brackets, and the schedule in an intuitive and visually appealing manner
-- **Near Real-Time Updates:** Syncs with the Excel file to reflect the latest changes in the pool, scores, brackets, and the schedule
+- **Near Real-Time Updates:** Frequently syncs with the Excel file to reflect the latest changes in the pool, scores, brackets, and the schedule
 - **Accessibility:** Participants and organizers can access information from any device with an internet connection
 
 ## Getting Started
-
 
 ## Contributing
 
@@ -37,5 +36,5 @@ Contributions to the UCCS Tennis Tournament Manager are welcome. If you have ide
 This project is licensed under the [MIT License](https://opensource.org/license/mit/).
 
 ## Acknowledgments
-One of my friends had created a similar Excel file and was looking for a way to show people the scores and schedule more easily. I decided to take up the project and started developing this.
 
+One of my friends had created a similar Excel file and was looking for a way to show people the scores and schedule more easily. I decided to take up the project and started developing this.
