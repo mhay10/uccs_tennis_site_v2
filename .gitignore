@@ -9,3 +9,5 @@ web_server/.env.*
 web_server/!.env.example
 web_server/vite.config.js.timestamp-*
 web_server/vite.config.ts.timestamp-*
+
+web_server_assets/node_modules
