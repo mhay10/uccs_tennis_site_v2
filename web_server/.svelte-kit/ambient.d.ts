@@ -42,6 +42,7 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const npm_package_devDependencies_tslib: string;
 	export const NODE_OPTIONS: string;
+	export const npm_package_devDependencies__sveltejs_adapter_node: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_scripts_check_watch: string;
@@ -83,7 +84,6 @@ declare module '$env/static/private' {
 	export const npm_config_frozen_lockfile: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const DISPLAY: string;
-	export const npm_package_devDependencies_fast_glob: string;
 	export const npm_lifecycle_event: string;
 	export const SHLVL: string;
 	export const PAGER: string;
@@ -166,6 +166,7 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		npm_package_devDependencies_tslib: string;
 		NODE_OPTIONS: string;
+		npm_package_devDependencies__sveltejs_adapter_node: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_tailwindcss: string;
 		npm_package_scripts_check_watch: string;
@@ -207,7 +208,6 @@ declare module '$env/dynamic/private' {
 		npm_config_frozen_lockfile: string;
 		VSCODE_GIT_IPC_HANDLE: string;
 		DISPLAY: string;
-		npm_package_devDependencies_fast_glob: string;
 		npm_lifecycle_event: string;
 		SHLVL: string;
 		PAGER: string;
