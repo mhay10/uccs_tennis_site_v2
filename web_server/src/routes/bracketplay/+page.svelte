@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-
-	const urlPrefix = "https://1e53-146-70-174-179.ngrok-free.app/bracketplay";
+	import { urlPrefix } from "$lib";
 
 	let bracketIndex = -1;
 	const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];
@@ -10,7 +9,9 @@
 	onMount(async () => {
 		listOfBrackets = [];
 		for (const bracket of bracketNames) {
-			const res = await fetch(`${urlPrefix}/${getFilename(bracket)}`, { method: "HEAD" });
+			const res = await fetch(`${urlPrefix}/bracketplay/${getFilename(bracket)}`, {
+				method: "HEAD"
+			});
 			if (res.ok) listOfBrackets = [...listOfBrackets, bracket];
 		}
 	});
@@ -31,10 +32,10 @@
 	</select>
 
 	{#if bracketIndex !== -1}
-		<div class="w-4/5 max-[800px]:overflow-x-scroll mt-10">
+		<div class="mt-10 w-4/5 max-[800px]:overflow-x-scroll">
 			<div class="max-[800px]:w-[900px]">
 				<img
-					src="{urlPrefix}/{getFilename(bracketNames[bracketIndex])}"
+					src="{urlPrefix}/bracketplay/{getFilename(bracketNames[bracketIndex])}"
 					alt={bracketNames[bracketIndex]}
 					class="m-auto h-full"
 				/>

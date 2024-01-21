@@ -1,5 +1,5 @@
 <script lang="ts">
-	const urlPrefix = "https://1e53-146-70-174-179.ngrok-free.app/poolplay";
+	import { urlPrefix } from "$lib";
 
 	let poolIndex = -1;
 	$: listOfPools = Array.from({ length: 8 }, (_, i) => i);
@@ -8,7 +8,11 @@
 <div class="flex flex-col items-center">
 	<div class="w-4/5 max-[800px]:overflow-x-scroll">
 		<div class="max-[800px]:w-[900px]">
-			<img src="{urlPrefix}/pools.png" alt="Table of pools with teams" class="m-auto h-full" />
+			<img
+				src="{urlPrefix}/poolplay/pools.png"
+				alt="Table of pools with teams"
+				class="m-auto h-full"
+			/>
 		</div>
 	</div>
 
@@ -23,7 +27,7 @@
 
 		{#if poolIndex !== -1}
 			<img
-				src="{urlPrefix}/pool{poolIndex + 1}.png"
+				src="{urlPrefix}/poolplay/pool{poolIndex + 1}.png"
 				alt="Pool {poolIndex + 1}"
 				class="ml-auto mr-auto mt-10 w-[500px] max-[640px]:w-full"
 			/>
