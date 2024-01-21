@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	const urlPrefix = "http://localhost:3000/bracketplay";
+	const urlPrefix = "https://1e53-146-70-174-179.ngrok-free.app/bracketplay";
 
 	let bracketIndex = -1;
 	const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];
@@ -21,8 +21,8 @@
 	}
 </script>
 
-<div>
-	<h3>Select bracket from list below</h3>
+<div class="flex flex-col items-center">
+	<h3 class="mb-2 text-lg font-bold">Select bracket from list below</h3>
 	<select bind:value={bracketIndex}>
 		<option value={-1}>-- Select Bracket --</option>
 		{#each listOfBrackets as name, i}
@@ -31,9 +31,14 @@
 	</select>
 
 	{#if bracketIndex !== -1}
-		<img
-			src="{urlPrefix}/{getFilename(bracketNames[bracketIndex])}"
-			alt={bracketNames[bracketIndex]}
-		/>
+		<div class="w-4/5 max-[800px]:overflow-x-scroll mt-10">
+			<div class="max-[800px]:w-[900px]">
+				<img
+					src="{urlPrefix}/{getFilename(bracketNames[bracketIndex])}"
+					alt={bracketNames[bracketIndex]}
+					class="m-auto h-full"
+				/>
+			</div>
+		</div>
 	{/if}
 </div>

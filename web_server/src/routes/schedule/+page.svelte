@@ -1,5 +1,5 @@
 <script lang="ts">
-	const urlPrefix = "http://localhost:3000/schedule";
+	const urlPrefix = "https://1e53-146-70-174-179.ngrok-free.app/schedule";
 </script>
 
 <div class="flex h-[500px] justify-evenly max-[640px]:h-[320px]">

@@ -42,7 +42,6 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const npm_package_devDependencies_tslib: string;
 	export const NODE_OPTIONS: string;
-	export const npm_package_devDependencies__sveltejs_adapter_node: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_scripts_check_watch: string;
@@ -98,6 +97,7 @@ declare module '$env/static/private' {
 	export const NODE_PATH: string;
 	export const npm_package_devDependencies_flowbite_svelte: string;
 	export const DEBUGINFOD_URLS: string;
+	export const npm_package_devDependencies__sveltejs_adapter_cloudflare: string;
 	export const WSLENV: string;
 	export const npm_package_scripts_dev: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
@@ -166,7 +166,6 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		npm_package_devDependencies_tslib: string;
 		NODE_OPTIONS: string;
-		npm_package_devDependencies__sveltejs_adapter_node: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_tailwindcss: string;
 		npm_package_scripts_check_watch: string;
@@ -222,6 +221,7 @@ declare module '$env/dynamic/private' {
 		NODE_PATH: string;
 		npm_package_devDependencies_flowbite_svelte: string;
 		DEBUGINFOD_URLS: string;
+		npm_package_devDependencies__sveltejs_adapter_cloudflare: string;
 		WSLENV: string;
 		npm_package_scripts_dev: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;

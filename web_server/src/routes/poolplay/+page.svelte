@@ -1,5 +1,5 @@
 <script lang="ts">
-	const urlPrefix = "http://localhost:3000/poolplay";
+	const urlPrefix = "https://1e53-146-70-174-179.ngrok-free.app/poolplay";
 
 	let poolIndex = -1;
 	$: listOfPools = Array.from({ length: 8 }, (_, i) => i);
