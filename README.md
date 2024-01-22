@@ -58,7 +58,7 @@ docker run -d --rm --name uccs_tennis_site_v2_assets uccs_tennis_site_v2_assets
 
 #### <u>Static Frontend</u>
 
-The static frontend is meant to be hosted using (Cloudflare Pages)[https://pages.cloudflare.com/]. You will need to have a Cloudflare account to host the static frontend.
+The static frontend is meant to be hosted using [Cloudflare Pages](https://pages.cloudflare.com/). You will need to have a Cloudflare account to host the static frontend.
 
 - Change `urlPrefix` in `web_server/src/lib/index.ts` to your asset server URL.
 - Follow the instructions on the [Cloudflare Pages documentation](https://developers.cloudflare.com/pages/get-started/guide) to create webpage .
