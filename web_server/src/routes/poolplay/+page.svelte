@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { urlPrefix } from "$lib";
 
-	let poolIndex = -1;
-	$: listOfPools = Array.from({ length: 8 }, (_, i) => i);
+	async function preloadPool(poolNum: number) {
+		const img = new Image();
+		img.src = `${urlPrefix}/poolplay/pool${poolNum + 1}.png`;
+		await img.decode();
+	}
 </script>
 
 <div class="flex flex-col items-center">
@@ -19,8 +22,14 @@
 	<div
 		class="mt-5 flex h-32 h-[500px] grow flex-wrap items-center justify-evenly max-[900px]:overflow-y-scroll max-[640px]:h-[45vh]"
 	>
-		{#each { length: 8 } as _, i}
-			<img src="{urlPrefix}/poolplay/pool{i + 1}.png" alt="Pool {i + 1}" class="p-5 w-auto" />
+		{#each { length: 8 } as _, poolNum}
+			{#await preloadPool(poolNum) then}
+				<img
+					src="{urlPrefix}/poolplay/pool{poolNum + 1}.png"
+					alt="Pool {poolNum + 1}"
+					class="w-auto p-5"
+				/>
+			{/await}
 		{/each}
 	</div>
 </div>
