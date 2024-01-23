@@ -36,12 +36,10 @@ declare module '$env/static/private' {
 	export const WSL2_GUI_APPS_ENABLED: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const npm_package_devDependencies_eslint_plugin_svelte: string;
-	export const VSCODE_INSPECTOR_OPTIONS: string;
 	export const WSL_DISTRO_NAME: string;
 	export const npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 	export const NODE: string;
 	export const npm_package_devDependencies_tslib: string;
-	export const NODE_OPTIONS: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_scripts_check_watch: string;
@@ -160,12 +158,10 @@ declare module '$env/dynamic/private' {
 		WSL2_GUI_APPS_ENABLED: string;
 		TERM_PROGRAM_VERSION: string;
 		npm_package_devDependencies_eslint_plugin_svelte: string;
-		VSCODE_INSPECTOR_OPTIONS: string;
 		WSL_DISTRO_NAME: string;
 		npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 		NODE: string;
 		npm_package_devDependencies_tslib: string;
-		NODE_OPTIONS: string;
 		npm_package_devDependencies_autoprefixer: string;
 		npm_package_devDependencies_tailwindcss: string;
 		npm_package_scripts_check_watch: string;

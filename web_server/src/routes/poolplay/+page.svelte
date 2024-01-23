@@ -16,21 +16,11 @@
 		</div>
 	</div>
 
-	<div class="mt-5">
-		<h3 class="mb-2 text-lg font-bold">Select pool from list below</h3>
-		<select bind:value={poolIndex}>
-			<option value={-1}>-- Select Pool --</option>
-			{#each listOfPools as _, i}
-				<option value={i}>Pool {i + 1}</option>
-			{/each}
-		</select>
-
-		{#if poolIndex !== -1}
-			<img
-				src="{urlPrefix}/poolplay/pool{poolIndex + 1}.png"
-				alt="Pool {poolIndex + 1}"
-				class="ml-auto mr-auto mt-10 w-[500px] max-[640px]:w-full"
-			/>
-		{/if}
+	<div
+		class="mt-5 flex h-32 h-[500px] grow flex-wrap items-center justify-evenly max-[640px]:overflow-y-scroll max-[640px]:h-[45vh]"
+	>
+		{#each { length: 8 } as _, i}
+			<img src="{urlPrefix}/poolplay/pool{i + 1}.png" alt="Pool {i + 1}" class="p-5" />
+		{/each}
 	</div>
 </div>
