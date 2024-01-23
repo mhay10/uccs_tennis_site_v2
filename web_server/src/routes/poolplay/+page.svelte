@@ -17,10 +17,10 @@
 	</div>
 
 	<div
-		class="mt-5 flex h-32 h-[500px] grow flex-wrap items-center justify-evenly max-[640px]:overflow-y-scroll max-[640px]:h-[45vh]"
+		class="mt-5 flex h-32 h-[500px] grow flex-wrap items-center justify-evenly max-[900px]:overflow-y-scroll max-[640px]:h-[45vh]"
 	>
 		{#each { length: 8 } as _, i}
-			<img src="{urlPrefix}/poolplay/pool{i + 1}.png" alt="Pool {i + 1}" class="p-5" />
+			<img src="{urlPrefix}/poolplay/pool{i + 1}.png" alt="Pool {i + 1}" class="p-5 w-auto" />
 		{/each}
 	</div>
 </div>
