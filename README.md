@@ -73,6 +73,12 @@ The Excel file is used on your local machine. You will need to have Excel instal
 
 **IMPORTANT:** Be sure to enable macros when opening the Excel file. Macros are required for the Excel file to function properly.
 
+#### <u>Web Server Uploading</u>
+
+To successfully upload tables to the asset server, create the folder `uploads` in the same directory that the Excel file is located in.
+
+**IMPORTANT:** The folder is not created automatically.
+
 #### <u>Tournament Setup</u>
 
 When setting up the Excel file, you will need to specify the following information in the _TOURNAMENT DETAILS_ sheet:
