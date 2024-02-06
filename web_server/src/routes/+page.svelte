@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center">
+<div class="mb-[15vh] flex flex-col items-center">
 	<img
 		src="https://communique.uccs.edu/wp-content/uploads/2022/09/IMG_6416.jpg"
 		alt="UCCS Campus"

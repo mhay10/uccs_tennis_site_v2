@@ -3,7 +3,7 @@
 	import { CibInstagram, CibGithub, CibGmail } from "svelte-coreui-icons";
 </script>
 
-<Footer class="absolute bottom-0 start-0 z-20 w-full bg-gray-800 py-5 text-white">
+<Footer class="fixed bottom-0 start-0 z-20 w-full bg-gray-800 py-5 text-white mt-[500px]">
 	<FooterLinkGroup ulClass="flex flex-wrap justify-center items-center mt-3 text-sm sm:mt-0">
 		<FooterLink
 			href="https://giving.cu.edu/fund/uccs-club-tennis-support-fund"
