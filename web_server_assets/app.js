@@ -2,6 +2,7 @@ import express from "express";
 import fg from "fast-glob";
 import { writeFile, unlink } from "fs/promises";
 import cors from "cors";
+import sharp from "sharp";
 
 // Create a new express instance
 const app = express();
@@ -49,9 +50,12 @@ app.post("/upload", async (req, res) => {
     // Decode image from base64
     const decodedImage = Buffer.from(image.content, "base64");
 
+    // Resize image to 1920x1080
+    const resizedImage = sharp(decodedImage).resize(1920, 1080).toBuffer();
+
     // Write image to file
     const filePath = `public/${image.folder}/${image.name}.png`;
-    await writeFile(filePath, decodedImage);
+    await writeFile(filePath, resizedImage);
   }
 
   console.log(`Uploaded ${newFiles.length} files`);

@@ -7,7 +7,7 @@
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<Navbar class="bg-gray-800 text-white" fluid={true}>
+<Navbar class="sticky top-0 bg-gray-800 text-white" fluid={true}>
 	<NavBrand href="/">
 		<div class="rounded-full bg-white">
 			<img

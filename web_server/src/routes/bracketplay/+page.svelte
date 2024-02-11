@@ -22,7 +22,7 @@
 	}
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center mb-[15vh]">
 	<h3 class="mb-2 text-lg font-bold">Select bracket from list below</h3>
 	<select bind:value={bracketIndex}>
 		<option value={-1}>-- Select Bracket --</option>
