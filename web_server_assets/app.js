@@ -17,7 +17,7 @@ app.use(
 );
 
 // Parse JSON bodies
-app.use(express.json({ limit: "300kb" }));
+app.use(express.json({ limit: "5mb" }));
 
 // Enable CORS
 app.use(cors());

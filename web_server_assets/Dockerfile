@@ -37,4 +37,4 @@ RUN chmod +x enable_zrok.sh
 RUN npm install
 
 # Start asset server and zrok tunnel
-CMD ./enable_zrok.sh & npm run start
+CMD ./enable_zrok.sh && npm run start
