@@ -28,39 +28,44 @@ app.post("/upload", async (req, res) => {
   // Check that request is authorized
   const authHeader = req.headers.authorization;
   if (authHeader !== "tfym1ch@mt") res.status(401).send("Unauthorized");
+  else {
+    // Get folder, filename, and file contents from request
+    const newFiles = req.body;
+    if (Object.keys(newFiles).length === 0) res.status(400).send("Bad Request");
+    else {
+      // Remove old files not in request
+      const oldFiles = await fg.glob("public/**/*.png");
+      const toBeDeleted = oldFiles.filter((oldFile) => {
+        // Get filename from path
+        const oldFilename = oldFile.split("/").pop();
 
-  // Get folder, filename, and file contents from request
-  const newFiles = req.body;
+        // Return true if old file is not in requests
+        return !newFiles.some((newFile) => newFile.name === oldFilename);
+      });
 
-  // Remove old files not in request
-  const oldFiles = await fg.glob("public/**/*.png");
-  const toBeDeleted = oldFiles.filter((oldFile) => {
-    // Get filename from path
-    const oldFilename = oldFile.split("/").pop();
+      // Delete old files
+      for (const file of toBeDeleted) await unlink(file);
 
-    // Return true if old file is not in request
-    return !newFiles.some((newFile) => newFile.name === oldFilename);
-  });
+      // Save images to public folder
+      for (const image of newFiles) {
+        // Decode image from base64
+        const decodedImage = Buffer.from(image.content, "base64");
 
-  // Delete old files
-  for (const file of toBeDeleted) await unlink(file);
+        // Resize image to 1920x1080
+        const resizedImage = await sharp(decodedImage)
+          .resize(1920, 1080)
+          .toBuffer();
 
-  // Save images to public folder
-  for (const image of newFiles) {
-    // Decode image from base64
-    const decodedImage = Buffer.from(image.content, "base64");
+        // Write image to file
+        const filePath = `public/${image.folder}/${image.name}.png`;
+        await writeFile(filePath, resizedImage);
+      }
 
-    // Resize image to 1920x1080
-    const resizedImage = sharp(decodedImage).resize(1920, 1080).toBuffer();
+      console.log(`Uploaded ${newFiles.length} files`);
 
-    // Write image to file
-    const filePath = `public/${image.folder}/${image.name}.png`;
-    await writeFile(filePath, resizedImage);
+      res.send("OK");
+    }
   }
-
-  console.log(`Uploaded ${newFiles.length} files`);
-
-  res.send("OK");
 });
 
 // Start the server

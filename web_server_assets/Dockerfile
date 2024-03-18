@@ -22,7 +22,6 @@ ENV ZROK_TOKEN=${zrok_token}
 ARG zrok_domain
 ENV ZROK_DOMAIN=${zrok_domain}
 
-
 ## ------- ASSET SERVER ------- ##
 
 # Copy asset server files
@@ -37,4 +36,5 @@ RUN chmod +x enable_zrok.sh
 RUN npm install
 
 # Start asset server and zrok tunnel
-CMD ./enable_zrok.sh && npm run start
+EXPOSE 3000
+CMD ./enable_zrok.sh
