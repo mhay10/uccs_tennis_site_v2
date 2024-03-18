@@ -53,7 +53,7 @@ app.post("/upload", async (req, res) => {
 
         // Resize image to 1920x1080
         const resizedImage = await sharp(decodedImage)
-          .resize(1920, 1080)
+          .resize(1920, 1080, { fit: "contain" })
           .toBuffer();
 
         // Write image to file
