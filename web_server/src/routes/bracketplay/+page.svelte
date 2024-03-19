@@ -4,7 +4,7 @@
 
 	let bracketIndex = -1;
 	const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];
-	let listOfBrackets: string[];
+	let listOfBrackets: string[] = [];
 
 	onMount(async () => {
 		listOfBrackets = [];
@@ -12,8 +12,10 @@
 			const res = await fetch(`${urlPrefix}/bracketplay/${getFilename(bracket)}`, {
 				method: "HEAD"
 			});
-			if (res.ok) listOfBrackets = [...listOfBrackets, bracket];
+			if (res.ok) listOfBrackets.push(bracket);
 		}
+
+		listOfBrackets = listOfBrackets;
 	});
 
 	function getFilename(name: string) {
