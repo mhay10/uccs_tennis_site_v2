@@ -63,7 +63,7 @@ app.post("/upload", async (req, res) => {
               height = 218;
             }
             break;
-          case "bracketplay:
+          case "bracketplay":
             width = 1228;
             height = 753;
             break;
