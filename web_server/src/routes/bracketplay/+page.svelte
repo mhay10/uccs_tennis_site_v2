@@ -4,7 +4,7 @@
 
 	let bracketIndex = -1;
 	const bracketNames = ["Gold Bracket", "Silver Bracket", "Bronze Bracket", "Copper Bracket"];
-	let listOfBrackets: string[] = [];
+	let listOfBrackets: string[];
 
 	onMount(async () => {
 		listOfBrackets = [];
@@ -22,7 +22,7 @@
 	}
 </script>
 
-<div class="flex flex-col items-center mb-[15vh]">
+<div class="mb-[15vh] flex flex-col items-center">
 	<h3 class="mb-2 text-lg font-bold">Select bracket from list below</h3>
 	<select bind:value={bracketIndex}>
 		<option value={-1}>-- Select Bracket --</option>
@@ -38,6 +38,7 @@
 					src="{urlPrefix}/bracketplay/{getFilename(bracketNames[bracketIndex])}"
 					alt={bracketNames[bracketIndex]}
 					class="m-auto h-full"
+					crossorigin="anonymous"
 				/>
 			</div>
 		</div>

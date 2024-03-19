@@ -30,12 +30,14 @@
 					src="{urlPrefix}/poolplay/pool{poolNum + 1}.png"
 					alt="Pool {poolNum + 1}"
 					class="w-auto p-5"
+					crossorigin="anonymous"
 				/>
 			{:catch}
 				<img
 					src="{urlPrefix}/poolplay/pool{poolNum + 1}.png"
 					alt="Pool {poolNum + 1}"
 					class="w-auto p-5"
+					crossorigin="anonymous"
 				/>
 			{/await}
 		{/each}

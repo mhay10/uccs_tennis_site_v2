@@ -8,6 +8,7 @@
 			src="{urlPrefix}/schedule/schedule.png"
 			alt="Match schedule"
 			class="mt-5 max-[640px]:w-4/5"
+			crossorigin="anonymous"
 		/>
 	</div>
 	<div class="flex flex-col items-center overflow-y-scroll">
@@ -15,6 +16,7 @@
 			src="{urlPrefix}/schedule/upcomingMatches.png"
 			alt="List of upcoming matches"
 			class="mt-5 max-[640px]:w-4/5"
+			crossorigin="anonymous"
 		/>
 	</div>
 </div>
