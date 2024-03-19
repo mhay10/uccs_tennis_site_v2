@@ -51,9 +51,34 @@ app.post("/upload", async (req, res) => {
         // Decode image from base64
         const decodedImage = Buffer.from(image.content, "base64");
 
-        // Resize image to 1920x1080
+        // Resize image based on image type
+        let width, height;
+        switch (image.folder) {
+          case "poolplay":
+            if (/\d+$/.test(image.name)) {
+              width = 343;
+              height = 88;
+            } else {
+              width = 992;
+              height = 218;
+            }
+            break;
+          case "bracketplay:
+            width = 1228;
+            height = 753;
+            break;
+          case "schedule":
+            if (image.name === "upcomingMatches") {
+              width = 192;
+              height = 832;
+            } else {
+              width = 243;
+              height = 462;
+            }
+            break;
+        }
         const resizedImage = await sharp(decodedImage)
-          .resize(1920, 1080, { fit: "inside" })
+          .resize(width, height, { fit: "inside" })
           .toBuffer();
 
         // Write image to file
