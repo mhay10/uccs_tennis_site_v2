@@ -6,7 +6,7 @@ import sharp from "sharp";
 
 // Create a new express instance
 const app = express();
-const port = 3000;
+const port = 443;
 
 // Serve static files from the public directory
 app.use(
@@ -51,7 +51,7 @@ app.post("/upload", async (req, res) => {
         // Decode image from base64
         const decodedImage = Buffer.from(image.content, "base64");
 
-        // Resize image based on image type
+        // Set width and height of image based on image type
         let width, height;
         switch (image.folder) {
           case "poolplay":
@@ -77,6 +77,8 @@ app.post("/upload", async (req, res) => {
             }
             break;
         }
+
+        // Resize image
         const resizedImage = await sharp(decodedImage)
           .resize(width, height, { fit: "inside" })
           .toBuffer();

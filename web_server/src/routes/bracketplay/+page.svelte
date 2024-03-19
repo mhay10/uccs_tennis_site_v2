@@ -38,7 +38,6 @@
 					src="{urlPrefix}/bracketplay/{getFilename(bracketNames[bracketIndex])}"
 					alt={bracketNames[bracketIndex]}
 					class="m-auto h-full"
-					crossorigin="anonymous"
 				/>
 			</div>
 		</div>
