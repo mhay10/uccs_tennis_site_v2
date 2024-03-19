@@ -3,6 +3,7 @@ import fg from "fast-glob";
 import { writeFile, unlink } from "fs/promises";
 import cors from "cors";
 import sharp from "sharp";
+import https from "https";
 
 // Create a new express instance
 const app = express();
@@ -96,4 +97,8 @@ app.post("/upload", async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+// app.listen(port, () => console.log(`Server listening on port ${port}`));
+const server = https.createServer({
+  key: "/etc/letsencrypt/live/tennisassets.decisiveonion.com/privkey.pem",
+  cert: "/etc/letsencrypt/live/tennisassets.decisiveonion.com/fullchain.pem",
+}, app).listen(port, () => console.log(`Server listening on port ${port}`));
